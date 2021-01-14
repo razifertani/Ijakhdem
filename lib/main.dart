@@ -1,8 +1,9 @@
 import 'package:Ijakhdem/Core/Routes/routes.dart';
+import 'package:Ijakhdem/Core/Utils/appColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:Ijakhdem/injection_container.dart' as sl;
-import 'package:device_preview/device_preview.dart' show DevicePreview;
+// import 'package:device_preview/device_preview.dart' show DevicePreview;
 
 void main() {
   sl.init();
@@ -24,10 +25,11 @@ class MyApp extends StatelessWidget {
       // builder: DevicePreview.appBuilder,
       title: 'Ijakhdem',
       debugShowCheckedModeBanner: false,
-      // theme: ThemeData(
-      //   fontFamily: 'SourceSansPro',
-      //   primaryColor: Color.fromRGBO(236, 28, 64, 1.0),
-      // ),
+      theme: ThemeData(
+        // fontFamily: 'SourceSansPro',
+        primaryColor: AppColors.primaryColor,
+        buttonColor: AppColors.primaryColor,
+      ),
       initialRoute: '/signinProvider',
       onGenerateRoute: RouteGenerator.generateRoute,
     );

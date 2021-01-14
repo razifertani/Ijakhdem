@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:Ijakhdem/Core/Utils/appColors.dart';
 import 'package:Ijakhdem/Features/Signin/Presentation/bloc/login_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +22,7 @@ class _SplashScreenDisplayState extends State<SplashScreenDisplay> {
   void initState() {
     super.initState();
 
-    Timer(Duration(milliseconds: 100000), () {
+    Timer(Duration(milliseconds: 1000), () {
       stayLoggedIn();
     });
   }
@@ -67,7 +68,7 @@ class _SplashScreenDisplayState extends State<SplashScreenDisplay> {
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
-                color: Color(0xff231F20),
+                color: AppColors.blackColor,
               ),
             ),
           ],

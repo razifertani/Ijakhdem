@@ -1,3 +1,4 @@
+import 'package:Ijakhdem/Core/Utils/appColors.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreenWidget extends StatelessWidget {
@@ -26,7 +27,7 @@ class SplashScreenWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
-                color: Color(0xff231F20),
+                color: AppColors.blackColor,
               ),
             ),
           ],

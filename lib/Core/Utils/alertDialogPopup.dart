@@ -1,4 +1,4 @@
-import 'package:Ijakhdem/Core/Utils/colorsConstant.dart';
+import 'package:Ijakhdem/Core/Utils/appColors.dart';
 import 'package:flutter/material.dart';
 
 class AlertDialogPopup extends ModalRoute<void> {
@@ -106,7 +106,7 @@ class AlertDialogPopup extends ModalRoute<void> {
                           shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10.0))),
-                          color: ColorConstant.greenColor,
+                          color: AppColors.greenColor,
                           child: Container(
                             width: screenWidth * 1.0,
                             height: screenHeight * 0.08,
@@ -135,10 +135,12 @@ class AlertDialogPopup extends ModalRoute<void> {
                     height: 32,
                     width: 32,
                     decoration: BoxDecoration(
-                        color: Colors.red,
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            image: AssetImage("Assets/Images/close.png"))),
+                      color: Colors.red,
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage("Assets/Images/close.png"),
+                      ),
+                    ),
                   ),
                 ),
               )

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:Ijakhdem/Core/Utils/alertDialogPopup.dart';
+import 'package:Ijakhdem/Core/Utils/appColors.dart';
 import 'package:Ijakhdem/Core/Utils/inputChecker.dart';
 import 'package:Ijakhdem/Features/Signin/Presentation/bloc/login_bloc.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
   bool checkerFName = true;
   bool checkerLName = true;
   bool checkerEmail = true;
-  bool checkerPassword = false;
+  bool checkerPassword = true;
   String checkerNameMessage = 'Name should not contain symbols';
   String checkerEmailMessage = 'Email must be like username@serveur.extension';
   String checkerPasswordMessage =
@@ -68,10 +69,11 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
               Text(
                 'Create New Account',
                 style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize:
-                        (MediaQuery.of(context).size.width * 0.04 / 14.5) * 28,
-                    color: Color(0xffEC1C40)),
+                  fontWeight: FontWeight.w600,
+                  fontSize:
+                      (MediaQuery.of(context).size.width * 0.04 / 14.5) * 28,
+                  color: AppColors.primaryColor,
+                ),
               ),
               SizedBox(
                 height: (MediaQuery.of(context).size.width * 0.04 / 14.5) * 29,
@@ -86,7 +88,7 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                         TextFormField(
                           keyboardType: TextInputType.text,
                           style: TextStyle(
-                              color: Color(0xff231F20),
+                              color: AppColors.blackColor,
                               fontWeight: FontWeight.w500,
                               fontSize: (MediaQuery.of(context).size.width *
                                       0.04 /
@@ -101,7 +103,7 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                           decoration: InputDecoration(
                             hintText: 'First Name',
                             hintStyle: TextStyle(
-                                color: Colors.grey[800],
+                                color: AppColors.hintColor,
                                 fontWeight: FontWeight.w400,
                                 fontSize: (MediaQuery.of(context).size.width *
                                         0.04 /
@@ -138,7 +140,7 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                         TextFormField(
                           keyboardType: TextInputType.text,
                           style: TextStyle(
-                              color: Color(0xff231F20),
+                              color: AppColors.blackColor,
                               fontWeight: FontWeight.w500,
                               fontSize: (MediaQuery.of(context).size.width *
                                       0.04 /
@@ -151,11 +153,9 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                             });
                           },
                           decoration: InputDecoration(
-                            //  prefixIcon: Icon(Icons.call),
-                            // contentPadding: EdgeInsets.fromLTRB(0.0, 1.0, 0.0, 0.0),
                             hintText: 'Last Name',
                             hintStyle: TextStyle(
-                                color: Colors.grey[800],
+                                color: AppColors.hintColor,
                                 fontWeight: FontWeight.w400,
                                 fontSize: (MediaQuery.of(context).size.width *
                                         0.04 /
@@ -191,7 +191,7 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                   TextFormField(
                     keyboardType: TextInputType.emailAddress,
                     style: TextStyle(
-                        color: Color(0xff231F20),
+                        color: AppColors.blackColor,
                         fontWeight: FontWeight.w500,
                         fontSize:
                             (MediaQuery.of(context).size.width * 0.04 / 14.5) *
@@ -205,7 +205,7 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                     decoration: InputDecoration(
                         hintText: 'Email',
                         hintStyle: TextStyle(
-                            color: Colors.grey[800],
+                            color: AppColors.hintColor,
                             fontWeight: FontWeight.w400,
                             fontSize: (MediaQuery.of(context).size.width *
                                     0.04 /
@@ -239,7 +239,7 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         style: TextStyle(
-                            color: Color(0xff231F20),
+                            color: AppColors.blackColor,
                             fontWeight: FontWeight.w500,
                             fontSize: (MediaQuery.of(context).size.width *
                                     0.04 /
@@ -268,7 +268,7 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                               }),
                           hintText: 'Password',
                           hintStyle: TextStyle(
-                              color: Colors.grey[800],
+                              color: AppColors.hintColor,
                               fontWeight: FontWeight.w400,
                               fontSize: (MediaQuery.of(context).size.width *
                                       0.04 /
@@ -304,7 +304,7 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: RaisedButton(
-                  color: Color(0xffEC1C40),
+                  color: AppColors.primaryColor,
                   child: Text(
                     'Register Now',
                     style: TextStyle(
@@ -315,6 +315,40 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                     ),
                   ),
                   onPressed: () {
+                    if ((fName == null || fName == '') &&
+                        (lName == null || lName == '') &&
+                        (email == null || email == '') &&
+                        (password == null || password == '')) {
+                      setState(() {
+                        checkerFName = false;
+                        checkerLName = false;
+                        checkerEmail = false;
+                        checkerPassword = false;
+                      });
+                    } else if (fName == null || fName == '') {
+                      setState(() {
+                        checkerFName = false;
+                      });
+                    } else if (lName == null || lName == '') {
+                      setState(() {
+                        checkerLName = false;
+                      });
+                    } else if (email == null || email == '') {
+                      setState(() {
+                        checkerEmail = false;
+                      });
+                    } else if (password == null || password == '') {
+                      setState(() {
+                        checkerPassword = false;
+                      });
+                    } else if (checkerEmail && checkerPassword) {
+                      dispatchRegister(
+                        fName,
+                        lName,
+                        email,
+                        password,
+                      );
+                    }
                     if (checkerFName &&
                         checkerLName &&
                         checkerEmail &&
@@ -342,7 +376,7 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                   Row(
                     children: [
                       Image.asset(
-                        "Assets/Images/facebook.png",
+                        "Assets/Images/icon-fb.png",
                         height: screenWidth * 21,
                         width: screenWidth * 21,
                       ),
@@ -350,21 +384,22 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                       Text(
                         'USING FACEBOOK',
                         style: TextStyle(
-                            fontSize: screenWidth * 14,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xff231F20)),
+                          fontSize: screenWidth * 14,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.blackColor,
+                        ),
                       ),
                     ],
                   ),
                   Container(
                     height: screenHeight * 25,
                     width: screenWidth * 1,
-                    color: Color(0xff231F20),
+                    color: AppColors.blackColor,
                   ),
                   Row(
                     children: [
                       Image.asset(
-                        "Assets/Images/google.png",
+                        "Assets/Images/icon-google.png",
                         height: screenWidth * 21,
                         width: screenWidth * 21,
                       ),
@@ -372,9 +407,10 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                       Text(
                         'USING GOOGLE',
                         style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: screenWidth * 14,
-                            color: Color(0xff231F20)),
+                          fontWeight: FontWeight.w500,
+                          fontSize: screenWidth * 14,
+                          color: AppColors.blackColor,
+                        ),
                       ),
                     ],
                   )
@@ -387,10 +423,10 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Already have an account? ',
+                    'Already have an account ? ',
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        color: Color(0xff505050),
+                        color: AppColors.blackColor,
                         fontSize:
                             (MediaQuery.of(context).size.width * 0.04 / 14.5) *
                                 12),
@@ -404,7 +440,7 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
                           decoration: TextDecoration.underline,
-                          color: Color(0xffEC1C40),
+                          color: AppColors.primaryColor,
                           fontSize: (MediaQuery.of(context).size.width *
                                   0.04 /
                                   14.5) *
@@ -420,10 +456,11 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                   child: Text(
                 'By registration, ',
                 style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize:
-                        (MediaQuery.of(context).size.width * 0.04 / 14.5) * 12,
-                    color: Color(0xff505050)),
+                  fontWeight: FontWeight.w500,
+                  fontSize:
+                      (MediaQuery.of(context).size.width * 0.04 / 14.5) * 12,
+                  color: AppColors.blackColor,
+                ),
               )),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -432,7 +469,7 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                     'I agree to the ',
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        color: Color(0xff505050),
+                        color: AppColors.blackColor,
                         fontSize:
                             (MediaQuery.of(context).size.width * 0.04 / 14.5) *
                                 12),
@@ -446,7 +483,7 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
                           decoration: TextDecoration.underline,
-                          color: Color(0xffEC1C40),
+                          color: AppColors.primaryColor,
                           fontSize: (MediaQuery.of(context).size.width *
                                   0.04 /
                                   14.5) *
@@ -457,7 +494,7 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                     " and ",
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        color: Color(0xff505050),
+                        color: AppColors.blackColor,
                         fontSize:
                             (MediaQuery.of(context).size.width * 0.04 / 14.5) *
                                 12),
@@ -471,7 +508,7 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
                           decoration: TextDecoration.underline,
-                          color: Color(0xffEC1C40),
+                          color: AppColors.primaryColor,
                           fontSize: (MediaQuery.of(context).size.width *
                                   0.04 /
                                   14.5) *

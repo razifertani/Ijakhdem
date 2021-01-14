@@ -1,4 +1,5 @@
 import 'package:Ijakhdem/Core/Utils/alertDialogPopup.dart';
+import 'package:Ijakhdem/Core/Utils/appColors.dart';
 import 'package:Ijakhdem/Core/Utils/inputChecker.dart';
 import 'package:Ijakhdem/Features/Signin/Presentation/bloc/login_bloc.dart';
 import 'package:flutter/material.dart';
@@ -78,9 +79,10 @@ class _LoginDisplayState extends State<LoginDisplay> {
                 'Login',
                 textScaleFactor: 1.0,
                 style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: screenWidth * 28,
-                    color: Color(0xff231F20)),
+                  fontWeight: FontWeight.w600,
+                  fontSize: screenWidth * 28,
+                  color: AppColors.blackColor,
+                ),
               ),
               SizedBox(
                 height: screenHeight * 29,
@@ -98,13 +100,13 @@ class _LoginDisplayState extends State<LoginDisplay> {
                       });
                     },
                     style: TextStyle(
-                        color: Color(0xff231F20),
+                        color: AppColors.blackColor,
                         fontWeight: FontWeight.w500,
                         fontSize: screenWidth * 21),
                     decoration: InputDecoration(
                         hintText: 'Email',
                         hintStyle: TextStyle(
-                            color: Colors.grey[800],
+                            color: AppColors.hintColor,
                             fontWeight: FontWeight.w400,
                             fontSize: screenWidth * 21)),
                   ),
@@ -142,7 +144,7 @@ class _LoginDisplayState extends State<LoginDisplay> {
                           });
                         },
                         style: TextStyle(
-                            color: Color(0xff231F20),
+                            color: AppColors.blackColor,
                             fontWeight: FontWeight.w500,
                             fontSize: screenWidth * 21),
                         obscureText: toggleVisibility,
@@ -162,7 +164,7 @@ class _LoginDisplayState extends State<LoginDisplay> {
                               }),
                           hintText: 'Password',
                           hintStyle: TextStyle(
-                            color: Colors.grey[800],
+                            color: AppColors.hintColor,
                             fontWeight: FontWeight.w400,
                             fontSize: screenWidth * 21,
                           ),
@@ -187,22 +189,23 @@ class _LoginDisplayState extends State<LoginDisplay> {
                 ],
               ),
               SizedBox(
-                height: screenWidth * 10.5,
+                height: screenHeight * 23,
               ),
               GestureDetector(
-                  onTap: () {
-                    dispatchGoToForgotPassword();
-                  },
-                  child: Text(
-                    'Forgot Password?',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: screenWidth * 14,
-                      color: Color(0xffEC1C40),
-                    ),
-                  )),
+                onTap: () {
+                  dispatchGoToForgotPassword();
+                },
+                child: Text(
+                  'Forgot Password?',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: screenWidth * 14,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+              ),
               SizedBox(
-                height: screenHeight * 35,
+                height: screenHeight * 23,
               ),
               ButtonTheme(
                 height: screenWidth * 64.0,
@@ -211,7 +214,7 @@ class _LoginDisplayState extends State<LoginDisplay> {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: RaisedButton(
-                  color: Colors.blue[900],
+                  color: AppColors.primaryColor,
                   child: Text(
                     'Login',
                     style: TextStyle(
@@ -222,10 +225,21 @@ class _LoginDisplayState extends State<LoginDisplay> {
                     ),
                   ),
                   onPressed: () {
-                    if (checkerEmail &&
-                        checkerPassword &&
-                        email != null &&
-                        password != null) {
+                    if ((email == null || email == '') &&
+                        (password == null || password == '')) {
+                      setState(() {
+                        checkerEmail = false;
+                        checkerPassword = false;
+                      });
+                    } else if (email == null || email == '') {
+                      setState(() {
+                        checkerEmail = false;
+                      });
+                    } else if (password == null || password == '') {
+                      setState(() {
+                        checkerPassword = false;
+                      });
+                    } else if (checkerEmail && checkerPassword) {
                       dispatchLogin(
                         email,
                         password,
@@ -282,9 +296,10 @@ class _LoginDisplayState extends State<LoginDisplay> {
                         Text(
                           'USING GOOGLE',
                           style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: screenWidth * 14,
-                              color: Color(0xff231F20)),
+                            fontWeight: FontWeight.w500,
+                            fontSize: screenWidth * 14,
+                            color: AppColors.blackColor,
+                          ),
                         ),
                       ],
                     ),
@@ -298,11 +313,12 @@ class _LoginDisplayState extends State<LoginDisplay> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'New User?',
+                    'New User ? ',
                     style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xff999999),
-                        fontSize: screenWidth * 14),
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.blackColor,
+                      fontSize: screenWidth * 14,
+                    ),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -311,10 +327,11 @@ class _LoginDisplayState extends State<LoginDisplay> {
                     child: Text(
                       'Create an account',
                       style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          decoration: TextDecoration.underline,
-                          color: Color(0xffEC1C40),
-                          fontSize: screenWidth * 14),
+                        fontWeight: FontWeight.w400,
+                        decoration: TextDecoration.underline,
+                        color: AppColors.primaryColor,
+                        fontSize: screenWidth * 14,
+                      ),
                     ),
                   ),
                 ],

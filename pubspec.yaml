@@ -31,9 +31,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  # assets:
-  #   - Assets/Images/
-  #   - Assets/Fonts/
+  assets:
+    - Assets/Images/
+    - Assets/Fonts/
 
   # fonts:
   #   - family: SourceSansPro
