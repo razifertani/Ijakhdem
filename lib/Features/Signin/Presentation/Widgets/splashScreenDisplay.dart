@@ -21,7 +21,7 @@ class _SplashScreenDisplayState extends State<SplashScreenDisplay> {
   void initState() {
     super.initState();
 
-    Timer(Duration(milliseconds: 1000), () {
+    Timer(Duration(milliseconds: 100000), () {
       stayLoggedIn();
     });
   }
@@ -46,8 +46,8 @@ class _SplashScreenDisplayState extends State<SplashScreenDisplay> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width * 0.04 / 14.5;
-    double screenHeight = MediaQuery.of(context).size.height * 0.02 / 14;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: Center(
@@ -56,12 +56,14 @@ class _SplashScreenDisplayState extends State<SplashScreenDisplay> {
           children: <Widget>[
             Image.asset(
               "Assets/Images/logo.png",
-              height: screenHeight * 250,
-              width: screenWidth * 250,
+              height: screenHeight * 0.4,
+              width: screenWidth * 0.8,
             ),
-            SizedBox(height: screenWidth * 50),
+            SizedBox(
+              height: screenHeight * 0.1,
+            ),
             Text(
-              "V 0.3.3",
+              "V 0.0.1",
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,

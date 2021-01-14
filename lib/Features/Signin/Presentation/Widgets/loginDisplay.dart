@@ -68,10 +68,10 @@ class _LoginDisplayState extends State<LoginDisplay> {
                 padding: const EdgeInsets.only(top: 40, bottom: 37),
                 child: Center(
                     child: Image.asset(
-                  "Assets/Images/art.png",
+                  "Assets/Images/splash.png",
                   fit: BoxFit.cover,
-                  height: screenWidth * 145.95,
-                  width: screenWidth * 197.57,
+                  height: screenWidth * 130, //145.95,
+                  width: screenWidth * 150, //197.57,
                 )),
               ),
               Text(
@@ -79,7 +79,6 @@ class _LoginDisplayState extends State<LoginDisplay> {
                 textScaleFactor: 1.0,
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontFamily: 'SFProText',
                     fontSize: screenWidth * 28,
                     color: Color(0xff231F20)),
               ),
@@ -100,7 +99,6 @@ class _LoginDisplayState extends State<LoginDisplay> {
                     },
                     style: TextStyle(
                         color: Color(0xff231F20),
-                        fontFamily: 'SFProText',
                         fontWeight: FontWeight.w500,
                         fontSize: screenWidth * 21),
                     decoration: InputDecoration(
@@ -145,7 +143,6 @@ class _LoginDisplayState extends State<LoginDisplay> {
                         },
                         style: TextStyle(
                             color: Color(0xff231F20),
-                            fontFamily: 'SFProText',
                             fontWeight: FontWeight.w500,
                             fontSize: screenWidth * 21),
                         obscureText: toggleVisibility,
@@ -200,7 +197,6 @@ class _LoginDisplayState extends State<LoginDisplay> {
                     'Forgot Password?',
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
-                      fontFamily: 'SFProText',
                       fontSize: screenWidth * 14,
                       color: Color(0xffEC1C40),
                     ),
@@ -215,7 +211,7 @@ class _LoginDisplayState extends State<LoginDisplay> {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: RaisedButton(
-                  color: Color(0xffEC1C40),
+                  color: Colors.blue[900],
                   child: Text(
                     'Login',
                     style: TextStyle(
@@ -223,7 +219,6 @@ class _LoginDisplayState extends State<LoginDisplay> {
                       letterSpacing: screenWidth * 0.2,
                       fontSize: screenWidth * 18,
                       fontWeight: FontWeight.w600,
-                      fontFamily: 'SFProText',
                     ),
                   ),
                   onPressed: () {
@@ -260,7 +255,6 @@ class _LoginDisplayState extends State<LoginDisplay> {
                         Text(
                           'USING FACEBOOK',
                           style: TextStyle(
-                              fontFamily: 'SFProText',
                               fontSize: screenWidth * 14,
                               fontWeight: FontWeight.w500,
                               color: Color(0xff231F20)),
@@ -288,7 +282,6 @@ class _LoginDisplayState extends State<LoginDisplay> {
                         Text(
                           'USING GOOGLE',
                           style: TextStyle(
-                              fontFamily: 'SFProText',
                               fontWeight: FontWeight.w500,
                               fontSize: screenWidth * 14,
                               color: Color(0xff231F20)),
@@ -308,7 +301,6 @@ class _LoginDisplayState extends State<LoginDisplay> {
                     'New User?',
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontFamily: 'SFProText',
                         color: Color(0xff999999),
                         fontSize: screenWidth * 14),
                   ),
@@ -320,7 +312,6 @@ class _LoginDisplayState extends State<LoginDisplay> {
                       'Create an account',
                       style: TextStyle(
                           fontWeight: FontWeight.w400,
-                          fontFamily: 'SFProText',
                           decoration: TextDecoration.underline,
                           color: Color(0xffEC1C40),
                           fontSize: screenWidth * 14),

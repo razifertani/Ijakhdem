@@ -69,7 +69,6 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                 'Create New Account',
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontFamily: 'SourceSansPro',
                     fontSize:
                         (MediaQuery.of(context).size.width * 0.04 / 14.5) * 28,
                     color: Color(0xffEC1C40)),
@@ -88,7 +87,6 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                           keyboardType: TextInputType.text,
                           style: TextStyle(
                               color: Color(0xff231F20),
-                              fontFamily: 'SourceSansPro',
                               fontWeight: FontWeight.w500,
                               fontSize: (MediaQuery.of(context).size.width *
                                       0.04 /
@@ -105,7 +103,6 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                             hintStyle: TextStyle(
                                 color: Colors.grey[800],
                                 fontWeight: FontWeight.w400,
-                                fontFamily: 'SourceSansPro',
                                 fontSize: (MediaQuery.of(context).size.width *
                                         0.04 /
                                         14.5) *
@@ -142,7 +139,6 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                           keyboardType: TextInputType.text,
                           style: TextStyle(
                               color: Color(0xff231F20),
-                              fontFamily: 'SourceSansPro',
                               fontWeight: FontWeight.w500,
                               fontSize: (MediaQuery.of(context).size.width *
                                       0.04 /
@@ -196,7 +192,6 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                     keyboardType: TextInputType.emailAddress,
                     style: TextStyle(
                         color: Color(0xff231F20),
-                        fontFamily: 'SourceSansPro',
                         fontWeight: FontWeight.w500,
                         fontSize:
                             (MediaQuery.of(context).size.width * 0.04 / 14.5) *
@@ -245,7 +240,6 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                         keyboardType: TextInputType.emailAddress,
                         style: TextStyle(
                             color: Color(0xff231F20),
-                            fontFamily: 'SourceSansPro',
                             fontWeight: FontWeight.w500,
                             fontSize: (MediaQuery.of(context).size.width *
                                     0.04 /
@@ -356,7 +350,6 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                       Text(
                         'USING FACEBOOK',
                         style: TextStyle(
-                            fontFamily: 'SourceSansPro',
                             fontSize: screenWidth * 14,
                             fontWeight: FontWeight.w500,
                             color: Color(0xff231F20)),
@@ -379,7 +372,6 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                       Text(
                         'USING GOOGLE',
                         style: TextStyle(
-                            fontFamily: 'SourceSansPro',
                             fontWeight: FontWeight.w500,
                             fontSize: screenWidth * 14,
                             color: Color(0xff231F20)),
@@ -397,7 +389,6 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                   Text(
                     'Already have an account? ',
                     style: TextStyle(
-                        fontFamily: 'SourceSansPro',
                         fontWeight: FontWeight.w500,
                         color: Color(0xff505050),
                         fontSize:
@@ -411,7 +402,6 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                     child: Text(
                       'Sign In',
                       style: TextStyle(
-                          fontFamily: 'SourceSansPro',
                           fontWeight: FontWeight.w500,
                           decoration: TextDecoration.underline,
                           color: Color(0xffEC1C40),
@@ -430,7 +420,6 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                   child: Text(
                 'By registration, ',
                 style: TextStyle(
-                    fontFamily: 'SourceSansPro',
                     fontWeight: FontWeight.w500,
                     fontSize:
                         (MediaQuery.of(context).size.width * 0.04 / 14.5) * 12,
@@ -442,7 +431,6 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                   Text(
                     'I agree to the ',
                     style: TextStyle(
-                        fontFamily: 'SourceSansPro',
                         fontWeight: FontWeight.w500,
                         color: Color(0xff505050),
                         fontSize:
@@ -456,7 +444,6 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                     child: Text(
                       'Terms of Use',
                       style: TextStyle(
-                          fontFamily: 'SourceSansPro',
                           fontWeight: FontWeight.w500,
                           decoration: TextDecoration.underline,
                           color: Color(0xffEC1C40),
@@ -469,7 +456,6 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                   Text(
                     " and ",
                     style: TextStyle(
-                        fontFamily: 'SourceSansPro',
                         fontWeight: FontWeight.w500,
                         color: Color(0xff505050),
                         fontSize:
@@ -483,7 +469,6 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                     child: Text(
                       'Privacy Policy',
                       style: TextStyle(
-                          fontFamily: 'SourceSansPro',
                           fontWeight: FontWeight.w500,
                           decoration: TextDecoration.underline,
                           color: Color(0xffEC1C40),
