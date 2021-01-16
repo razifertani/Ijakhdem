@@ -40,6 +40,8 @@ class GoToTermsOfUseState extends LoginState {}
 
 class GoToPrivacyPolicyState extends LoginState {}
 
+class GoToOnBoardingState extends LoginState {}
+
 class RegistredState extends LoginState {
   final String message;
 

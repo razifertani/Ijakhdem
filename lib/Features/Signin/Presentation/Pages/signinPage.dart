@@ -5,6 +5,7 @@ import 'package:Ijakhdem/Features/Signin/Presentation/Widgets/forgotPasswordDisp
 import 'package:Ijakhdem/Features/Signin/Presentation/Widgets/loginDisplay.dart';
 import 'package:Ijakhdem/Features/Signin/Presentation/Widgets/registerDisplay.dart';
 import 'package:Ijakhdem/Features/Signin/Presentation/Widgets/splashScreenDisplay.dart';
+import 'package:Ijakhdem/Features/Signin/Presentation/Widgets/onBoardingDisplay.dart';
 import 'package:Ijakhdem/Features/Signin/Presentation/bloc/login_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +23,10 @@ class SignInPage extends StatelessWidget {
         if (fromLogout == true) {
           fromLogout = false;
           return LoginDisplay();
+        }
+
+        if (state is GoToOnBoardingState) {
+          return OnBoardingDisplay();
         }
 
         if (state is SplashScreenDisplayState) {

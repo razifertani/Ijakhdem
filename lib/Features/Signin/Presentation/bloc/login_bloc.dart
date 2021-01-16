@@ -34,6 +34,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Stream<LoginState> mapEventToState(
     LoginEvent event,
   ) async* {
+    if (event is GoToOnBoardingEvent) {
+      yield GoToOnBoardingState();
+    }
     if (event is SigninEvent) {
       if (event.isConnected) {
         yield SplashScreenWidgetState();

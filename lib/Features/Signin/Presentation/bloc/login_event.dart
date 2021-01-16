@@ -42,6 +42,8 @@ class GoToTermsOfUseEvent extends LoginEvent {}
 
 class GoToPrivacyPolicyEvent extends LoginEvent {}
 
+class GoToOnBoardingEvent extends LoginEvent {}
+
 class SignupEvent extends LoginEvent {
   final String firstName;
   final String lastName;

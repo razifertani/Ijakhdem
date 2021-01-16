@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:Ijakhdem/Core/Utils/appColors.dart';
 import 'package:Ijakhdem/Features/Signin/Presentation/bloc/login_bloc.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +29,6 @@ class _SplashScreenDisplayState extends State<SplashScreenDisplay> {
   stayLoggedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getBool("stayConnected") == true) {
-      //  if (false == true) {
       BlocProvider.of<LoginBloc>(context).dispatch(
         SigninEvent(
           email: prefs.getString("email"),
@@ -40,7 +38,7 @@ class _SplashScreenDisplayState extends State<SplashScreenDisplay> {
       );
     } else {
       Timer(Duration(milliseconds: 1000), () {
-        BlocProvider.of<LoginBloc>(context).dispatch(GoToSigninEvent());
+        BlocProvider.of<LoginBloc>(context).dispatch(GoToOnBoardingEvent());
       });
     }
   }
