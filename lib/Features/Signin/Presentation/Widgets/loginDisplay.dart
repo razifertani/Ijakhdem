@@ -19,8 +19,8 @@ class LoginDisplay extends StatefulWidget {
 }
 
 class _LoginDisplayState extends State<LoginDisplay> {
-  String email = '';
-  String password = '';
+  String email = 'razifertani1@gmail.com';
+  String password = 'Razi123@';
   String message = 'null';
   bool checkerEmail = true;
   bool checkerPassword = true;

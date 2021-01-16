@@ -1,3 +1,4 @@
+import 'package:Ijakhdem/Features/Home/Presentation/Pages/homeProvider.dart';
 import 'package:Ijakhdem/Features/Signin/Presentation/Pages/signinProvider.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,13 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => SigninProvider(
             fromLogout: settings.arguments,
+          ),
+        );
+
+      case '/homeProvider':
+        return MaterialPageRoute(
+          builder: (_) => HomeProvider(
+            profile: settings.arguments,
           ),
         );
 
