@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       title: 'Ijakhdem',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // fontFamily: 'SourceSansPro',
+        fontFamily: 'Roboto',
         primaryColor: AppColors.primaryColor,
         buttonColor: AppColors.primaryColor,
       ),

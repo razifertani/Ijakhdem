@@ -1,22 +1,22 @@
-part of 'home_bloc.dart';
+part of 'profile_bloc.dart';
 
-abstract class HomeState extends Equatable {
-  HomeState([List props = const <dynamic>[]]) : super(props);
+abstract class ProfileState extends Equatable {
+  ProfileState([List props = const <dynamic>[]]) : super(props);
 }
 
-class EmptyHomeState extends HomeState {}
+class EmptyProfileState extends ProfileState {}
 
-class LoadingHomeState extends HomeState {}
+class LoadingProfileState extends ProfileState {}
 
-class ErrorHomeState extends HomeState {
+class ErrorProfileState extends ProfileState {
   final Profile profile;
 
-  ErrorHomeState({
+  ErrorProfileState({
     @required this.profile,
   }) : super([profile]);
 }
 
-class GoToHomeState extends HomeState {
+class GoToHomeState extends ProfileState {
   final Profile profile;
 
   GoToHomeState({
@@ -24,7 +24,7 @@ class GoToHomeState extends HomeState {
   }) : super([profile]);
 }
 
-class GoToMyJobsState extends HomeState {
+class GoToMyJobsState extends ProfileState {
   final Profile profile;
 
   GoToMyJobsState({
@@ -32,7 +32,7 @@ class GoToMyJobsState extends HomeState {
   }) : super([profile]);
 }
 
-class GoToPostJobState extends HomeState {
+class GoToPostJobState extends ProfileState {
   final Profile profile;
 
   GoToPostJobState({
@@ -40,7 +40,7 @@ class GoToPostJobState extends HomeState {
   }) : super([profile]);
 }
 
-class GoToMessagesState extends HomeState {
+class GoToMessagesState extends ProfileState {
   final Profile profile;
 
   GoToMessagesState({
@@ -48,7 +48,7 @@ class GoToMessagesState extends HomeState {
   }) : super([profile]);
 }
 
-class GoToProfileState extends HomeState {
+class GoToProfileState extends ProfileState {
   final Profile profile;
 
   GoToProfileState({

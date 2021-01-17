@@ -2,29 +2,20 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:Ijakhdem/Core/Utils/parameters.dart';
-import 'package:Ijakhdem/Features/Home/Domain/Usecases/logout.dart';
-import 'package:Ijakhdem/Features/Home/Domain/Usecases/resetPassword.dart';
 import 'package:Ijakhdem/Features/Signin/Domain/Entities/profileEntity.dart';
 
-part 'home_event.dart';
-part 'home_state.dart';
+part 'profile_event.dart';
+part 'profile_state.dart';
 
-class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final ResetPassword resetPassword;
-  final Logout logout;
-
-  HomeBloc({
-    @required this.resetPassword,
-    @required this.logout,
-  });
+class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
+  ProfileBloc();
 
   @override
-  HomeState get initialState => EmptyHomeState();
+  ProfileState get initialState => EmptyProfileState();
 
   @override
-  Stream<HomeState> mapEventToState(
-    HomeEvent event,
+  Stream<ProfileState> mapEventToState(
+    ProfileEvent event,
   ) async* {
     if (event is GoToHomeEvent) {
       yield GoToHomeState(

@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Ijakhdem/Core/Utils/loadingWidget.dart';
-import 'package:Ijakhdem/Features/Home/Presentation/Widgets/homeDisplay.dart';
-import 'package:Ijakhdem/Features/Home/Presentation/bloc/home_bloc.dart';
+import 'package:Ijakhdem/Features/MyJobs/Presentation/Widgets/myJobsDisplay.dart';
+import 'package:Ijakhdem/Features/MyJobs/Presentation/bloc/myJobs_bloc.dart';
 import 'package:Ijakhdem/Features/Signin/Domain/Entities/profileEntity.dart';
 
-class HomePage extends StatelessWidget {
+class MyJobsPage extends StatelessWidget {
   final Profile profile;
 
-  const HomePage({Key key, @required this.profile}) : super(key: key);
+  const MyJobsPage({Key key, @required this.profile}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(
+    return BlocBuilder<MyJobsBloc, MyJobsState>(
       builder: (context, state) {
-        if (state is EmptyHomeState) {
-          return HomeDisplay(
+        if (state is EmptyMyJobsState) {
+          return MyJobsDisplay(
             profile: profile,
           );
         }
 
-        if (state is GoToHomeState) {
-          return HomeDisplay(
+        if (state is GoToMyJobsState) {
+          return MyJobsDisplay(
             profile: state.profile,
           );
         }
@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
           // Navigator
         }
 
-        if (state is LoadingHomeState) {
+        if (state is LoadingMyJobsState) {
           return LoadingWidget();
         }
 

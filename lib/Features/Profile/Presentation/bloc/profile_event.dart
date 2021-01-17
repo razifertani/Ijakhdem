@@ -1,10 +1,10 @@
-part of 'home_bloc.dart';
+part of 'profile_bloc.dart';
 
-abstract class HomeEvent extends Equatable {
-  HomeEvent([List props = const <dynamic>[]]) : super(props);
+abstract class ProfileEvent extends Equatable {
+  ProfileEvent([List props = const <dynamic>[]]) : super(props);
 }
 
-class GoToHomeEvent extends HomeEvent {
+class GoToHomeEvent extends ProfileEvent {
   final Profile profile;
 
   GoToHomeEvent({
@@ -12,7 +12,7 @@ class GoToHomeEvent extends HomeEvent {
   }) : super([profile]);
 }
 
-class GoToMyJobsEvent extends HomeEvent {
+class GoToMyJobsEvent extends ProfileEvent {
   final Profile profile;
 
   GoToMyJobsEvent({
@@ -20,7 +20,7 @@ class GoToMyJobsEvent extends HomeEvent {
   }) : super([profile]);
 }
 
-class GoToPostJobEvent extends HomeEvent {
+class GoToPostJobEvent extends ProfileEvent {
   final Profile profile;
 
   GoToPostJobEvent({
@@ -28,7 +28,7 @@ class GoToPostJobEvent extends HomeEvent {
   }) : super([profile]);
 }
 
-class GoToMessagesEvent extends HomeEvent {
+class GoToMessagesEvent extends ProfileEvent {
   final Profile profile;
 
   GoToMessagesEvent({
@@ -36,7 +36,7 @@ class GoToMessagesEvent extends HomeEvent {
   }) : super([profile]);
 }
 
-class GoToProfileEvent extends HomeEvent {
+class GoToProfileEvent extends ProfileEvent {
   final Profile profile;
 
   GoToProfileEvent({

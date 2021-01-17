@@ -1,5 +1,9 @@
 import 'package:Ijakhdem/Features/Home/Presentation/Pages/homeProvider.dart';
 import 'package:Ijakhdem/Features/Signin/Presentation/Pages/signinProvider.dart';
+import 'package:Ijakhdem/Features/PostJob/Presentation/Pages/postJobProvider.dart';
+import 'package:Ijakhdem/Features/MyJobs/Presentation/Pages/myJobsProvider.dart';
+import 'package:Ijakhdem/Features/Messages/Presentation/Pages/messagesProvider.dart';
+import 'package:Ijakhdem/Features/Profile/Presentation/Pages/profileProvider.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {
@@ -15,6 +19,34 @@ class RouteGenerator {
       case '/homeProvider':
         return MaterialPageRoute(
           builder: (_) => HomeProvider(
+            profile: settings.arguments,
+          ),
+        );
+
+      case '/myJobsProvider':
+        return MaterialPageRoute(
+          builder: (_) => MyJobsProvider(
+            profile: settings.arguments,
+          ),
+        );
+
+      case '/postJobProvider':
+        return MaterialPageRoute(
+          builder: (_) => PostJobProvider(
+            profile: settings.arguments,
+          ),
+        );
+
+      case '/messagesProvider':
+        return MaterialPageRoute(
+          builder: (_) => MessagesProvider(
+            profile: settings.arguments,
+          ),
+        );
+
+      case '/profileProvider':
+        return MaterialPageRoute(
+          builder: (_) => ProfileProvider(
             profile: settings.arguments,
           ),
         );
