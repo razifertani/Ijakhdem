@@ -55,3 +55,43 @@ class GoToProfileState extends ProfileState {
     @required this.profile,
   }) : super([profile]);
 }
+
+class GoToProfileWidgetState extends ProfileState {
+  final Profile profile;
+
+  GoToProfileWidgetState({
+    @required this.profile,
+  }) : super([profile]);
+}
+
+class GoToBalanceWidgetState extends ProfileState {
+  final Profile profile;
+
+  GoToBalanceWidgetState({
+    @required this.profile,
+  }) : super([profile]);
+}
+
+class GoToNotificationsWidgetState extends ProfileState {
+  final Profile profile;
+
+  GoToNotificationsWidgetState({
+    @required this.profile,
+  }) : super([profile]);
+}
+
+class GoToNotificationsSettingsWidgetState extends ProfileState {
+  final Profile profile;
+
+  GoToNotificationsSettingsWidgetState({
+    @required this.profile,
+  }) : super([profile]);
+}
+
+class GoToProfileDisplayState extends ProfileState {
+  final Profile profile;
+
+  GoToProfileDisplayState({
+    @required this.profile,
+  }) : super([profile]);
+}

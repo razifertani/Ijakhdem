@@ -1,3 +1,7 @@
+import 'package:Ijakhdem/Features/Profile/Presentation/Widgets/Components/balanceWidget.dart';
+import 'package:Ijakhdem/Features/Profile/Presentation/Widgets/Components/notificationsSettingsWidget.dart';
+import 'package:Ijakhdem/Features/Profile/Presentation/Widgets/Components/notificationsWidget.dart';
+import 'package:Ijakhdem/Features/Profile/Presentation/Widgets/Components/profileWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Ijakhdem/Core/Utils/loadingWidget.dart';
@@ -22,6 +26,36 @@ class ProfilePage extends StatelessWidget {
 
         if (state is GoToProfileState) {
           return ProfileDisplay(
+            profile: state.profile,
+          );
+        }
+
+        if (state is GoToProfileWidgetState) {
+          return ProfileWidget(
+            profile: state.profile,
+          );
+        }
+
+        if (state is GoToBalanceWidgetState) {
+          return BalanceWidget(
+            profile: state.profile,
+          );
+        }
+
+        if (state is GoToProfileDisplayState) {
+          return ProfileDisplay(
+            profile: state.profile,
+          );
+        }
+
+        if (state is GoToNotificationsWidgetState) {
+          return NotificationsWidget(
+            profile: state.profile,
+          );
+        }
+
+        if (state is GoToNotificationsSettingsWidgetState) {
+          return NotificationsSettingsWidget(
             profile: state.profile,
           );
         }

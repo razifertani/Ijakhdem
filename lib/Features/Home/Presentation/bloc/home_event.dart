@@ -43,3 +43,27 @@ class GoToProfileEvent extends HomeEvent {
     @required this.profile,
   }) : super([profile]);
 }
+
+class GoToRecommendedJobsEvent extends HomeEvent {
+  final Profile profile;
+
+  GoToRecommendedJobsEvent({
+    @required this.profile,
+  }) : super([profile]);
+}
+
+class GoToListCategoriesEvent extends HomeEvent {
+  final Profile profile;
+
+  GoToListCategoriesEvent({
+    @required this.profile,
+  }) : super([profile]);
+}
+
+class GoToSpecificJobEvent extends HomeEvent {
+  final Profile profile;
+
+  GoToSpecificJobEvent({
+    @required this.profile,
+  }) : super([profile]);
+}

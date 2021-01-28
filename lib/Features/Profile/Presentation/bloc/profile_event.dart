@@ -43,3 +43,43 @@ class GoToProfileEvent extends ProfileEvent {
     @required this.profile,
   }) : super([profile]);
 }
+
+class GoToProfileWidgetEvent extends ProfileEvent {
+  final Profile profile;
+
+  GoToProfileWidgetEvent({
+    @required this.profile,
+  }) : super([profile]);
+}
+
+class GoToBalanceWidgetEvent extends ProfileEvent {
+  final Profile profile;
+
+  GoToBalanceWidgetEvent({
+    @required this.profile,
+  }) : super([profile]);
+}
+
+class GoToNotificationsWidgetEvent extends ProfileEvent {
+  final Profile profile;
+
+  GoToNotificationsWidgetEvent({
+    @required this.profile,
+  }) : super([profile]);
+}
+
+class GoToNotificationsSettingsWidgetEvent extends ProfileEvent {
+  final Profile profile;
+
+  GoToNotificationsSettingsWidgetEvent({
+    @required this.profile,
+  }) : super([profile]);
+}
+
+class GoToProfileDisplayEvent extends ProfileEvent {
+  final Profile profile;
+
+  GoToProfileDisplayEvent({
+    @required this.profile,
+  }) : super([profile]);
+}

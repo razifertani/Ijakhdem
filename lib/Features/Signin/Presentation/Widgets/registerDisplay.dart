@@ -57,12 +57,12 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Center(
-                  child: Image.asset(
-                "Assets/Images/logo.png",
-                fit: BoxFit.fitHeight,
-                height: screenHeight * 80,
-                width: screenWidth * 201.64,
-              )),
+                child: Image.asset(
+                  "Assets/Images/logo.png",
+                  fit: BoxFit.fitHeight,
+                  height: screenHeight * 150,
+                ),
+              ),
               SizedBox(
                 height: (MediaQuery.of(context).size.height * 0.02 / 14) * 57,
               ),
@@ -371,49 +371,58 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                 height: (MediaQuery.of(context).size.height * 0.02 / 14) * 37.5,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Row(
-                    children: [
-                      Image.asset(
-                        "Assets/Images/icon-fb.png",
-                        height: screenWidth * 21,
-                        width: screenWidth * 21,
-                      ),
-                      SizedBox(width: 2),
-                      Text(
-                        'USING FACEBOOK',
-                        style: TextStyle(
-                          fontSize: screenWidth * 14,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.blackColor,
+                  GestureDetector(
+                    onTap: () {},
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          "Assets/Images/icon-fb.png",
+                          height: screenWidth * 21,
+                          width: screenWidth * 21,
                         ),
-                      ),
-                    ],
+                        Container(
+                          width: screenWidth * 5,
+                        ),
+                        Text(
+                          'USING FACEBOOK',
+                          style: TextStyle(
+                              fontSize: screenWidth * 14,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xff231F20)),
+                        ),
+                      ],
+                    ),
                   ),
                   Container(
                     height: screenHeight * 25,
                     width: screenWidth * 1,
-                    color: AppColors.blackColor,
+                    color: Color(0xff231F20),
                   ),
-                  Row(
-                    children: [
-                      Image.asset(
-                        "Assets/Images/icon-google.png",
-                        height: screenWidth * 21,
-                        width: screenWidth * 21,
-                      ),
-                      SizedBox(width: 2),
-                      Text(
-                        'USING GOOGLE',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: screenWidth * 14,
-                          color: AppColors.blackColor,
+                  GestureDetector(
+                    onTap: () {},
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          "Assets/Images/icon-google.png",
+                          height: screenWidth * 21,
+                          width: screenWidth * 21,
                         ),
-                      ),
-                    ],
-                  )
+                        Container(
+                          width: screenWidth * 5,
+                        ),
+                        Text(
+                          'USING GOOGLE',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: screenWidth * 14,
+                            color: AppColors.blackColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
               SizedBox(
@@ -532,8 +541,7 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
   //   Navigator.of(context).push(AlertDialogueReg(headerMessage, message));
   // }
 
-  void dispatchRegister(
-      String fName, String lName, String email, String password) {
+  dispatchRegister(String fName, String lName, String email, String password) {
     BlocProvider.of<LoginBloc>(context).dispatch(
       SignupEvent(
         firstName: fName,
@@ -544,15 +552,15 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
     );
   }
 
-  void dispatchGoToLogin() {
+  dispatchGoToLogin() {
     BlocProvider.of<LoginBloc>(context).dispatch(GoToSigninEvent());
   }
 
-  void dispatchGoToTermsOfUse() {
+  dispatchGoToTermsOfUse() {
     BlocProvider.of<LoginBloc>(context).dispatch(GoToTermsOfUseEvent());
   }
 
-  void dispatchGoToPrivacyPolicy() {
+  dispatchGoToPrivacyPolicy() {
     BlocProvider.of<LoginBloc>(context).dispatch(GoToPrivacyPolicyEvent());
   }
 }

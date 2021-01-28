@@ -45,27 +45,22 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
       final loginParams =
           LoginParams(email: event.email, password: event.password);
-      final profile = Profile();
-      yield LoadedState(profile: profile);
-      // final failureOrToken = await login(loginParams);
-      // yield* failureOrToken.fold((failure) async* {
-      //   yield ErrorLoginState(
-      //     message: 'Server failure it will be up in a minute',
-      //   );
-      // }, (profile) async* {
-      // if (profile.userGeneralInfo.idUser == "User does not exist" ||
-      //     profile.userGeneralInfo.idUser == "Wrong password" ||
-      //     profile.userGeneralInfo.idUser == "Session expired" ||
-      //     profile.userGeneralInfo.idUser == 'Login issues' ||
-      //     profile.userGeneralInfo.idUser ==
-      //         'You cannot process login until you activate your account') {
-      //   yield ErrorLoginState(
-      //     message: profile.userGeneralInfo.idUser,
-      //   );
-      // } else {
-      //   yield LoadedState(profile: profile);
-      // }
-      // });
+      // final profile = Profile(firstName: 'Razi Fertani');
+      // yield LoadedState(profile: profile);
+      final failureOrToken = await login(loginParams);
+      yield* failureOrToken.fold((failure) async* {
+        yield ErrorLoginState(
+          message: 'Server failure it will be up in a minute',
+        );
+      }, (profile) async* {
+        if (profile.parameters.message != null) {
+          yield ErrorLoginState(
+            message: profile.parameters.message,
+          );
+        } else {
+          yield LoadedState(profile: profile);
+        }
+      });
     }
 
     if (event is SigningGoogleEvent) {

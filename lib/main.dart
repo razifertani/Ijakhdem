@@ -7,6 +7,7 @@ import 'package:Ijakhdem/injection_container.dart' as sl;
 
 void main() {
   sl.init();
+
   runApp(
     // DevicePreview(
     //   enabled: true,
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    SystemChrome.setEnabledSystemUIOverlays([]);
 
     return MaterialApp(
       // builder: DevicePreview.appBuilder,
