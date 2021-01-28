@@ -2,12 +2,12 @@
 import 'package:Ijakhdem/Features/Signin/Domain/Entities/profileEntity.dart';
 // import 'package:http/http.dart' as http;
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 
 class SocialMediaService {
-  final FirebaseAuth auth = FirebaseAuth.instance;
-  final GoogleSignIn googleSignIn = GoogleSignIn();
+  // final FirebaseAuth auth = FirebaseAuth.instance;
+  // final GoogleSignIn googleSignIn = GoogleSignIn();
   // FirebaseUser firebaseUser;
   // final FacebookLogin facebookSignIn = FacebookLogin();
 
