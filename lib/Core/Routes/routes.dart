@@ -10,11 +10,20 @@ class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/signinProvider':
+        return PageRouteBuilder(
+          pageBuilder: (context, animation1, animation2) {
+            return SigninProvider(
+              fromLogout: settings.arguments,
+            );
+          },
+        );
+      /*
         return MaterialPageRoute(
           builder: (_) => SigninProvider(
             fromLogout: settings.arguments,
           ),
         );
+      */
 
       case '/homeProvider':
         return PageRouteBuilder(

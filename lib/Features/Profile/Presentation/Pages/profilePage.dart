@@ -67,6 +67,15 @@ class ProfilePage extends StatelessWidget {
           );
         }
 
+        if (state is GoToSigninState) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Navigator.of(context).pushReplacementNamed(
+              '/signinProvider',
+              arguments: true,
+            );
+          });
+        }
+
         if (state is GoToMyJobsState) {
           //
         }

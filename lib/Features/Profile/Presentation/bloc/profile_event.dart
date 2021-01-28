@@ -91,3 +91,11 @@ class GoToOnBoardingEvent extends ProfileEvent {
     @required this.profile,
   }) : super([profile]);
 }
+
+class LogoutEvent extends ProfileEvent {
+  final Profile profile;
+
+  LogoutEvent({
+    @required this.profile,
+  }) : super([profile]);
+}

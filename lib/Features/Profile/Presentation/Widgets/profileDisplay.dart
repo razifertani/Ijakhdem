@@ -335,7 +335,7 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
               child: Center(
                 child: GestureDetector(
                   onTap: () {
-                    // dispatchGoToNotificationsWidget(profile);
+                    dispatchLogout(profile);
                   },
                   child: Text(
                     "Log out",
@@ -388,6 +388,14 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
   dispatchGoToOnBorading(Profile profile) {
     BlocProvider.of<ProfileBloc>(context).dispatch(
       GoToOnBoardingEvent(
+        profile: profile,
+      ),
+    );
+  }
+
+  dispatchLogout(Profile profile) {
+    BlocProvider.of<ProfileBloc>(context).dispatch(
+      LogoutEvent(
         profile: profile,
       ),
     );

@@ -103,3 +103,13 @@ class GoToOnBoardingState extends ProfileState {
     @required this.profile,
   }) : super([profile]);
 }
+
+class LogoutState extends ProfileState {
+  final Profile profile;
+
+  LogoutState({
+    @required this.profile,
+  }) : super([profile]);
+}
+
+class GoToSigninState extends ProfileState {}

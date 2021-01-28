@@ -3,12 +3,20 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:Ijakhdem/Features/Signin/Domain/Entities/profileEntity.dart';
+import 'package:Ijakhdem/Features/Profile/Domain/Usecases/logout.dart';
+import 'package:Ijakhdem/Features/Profile/Domain/Usecases/resetPassword.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  ProfileBloc();
+  final ResetPassword resetPassword;
+  final Logout logout;
+
+  ProfileBloc({
+    @required this.resetPassword,
+    @required this.logout,
+  });
 
   @override
   ProfileState get initialState => EmptyProfileState();
@@ -87,6 +95,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       yield GoToOnBoardingState(
         profile: event.profile,
       );
+    }
+
+    if (event is LogoutEvent) {
+      yield LoadingProfileState();
+      final failureOrToken = await logout(event.profile);
+      yield* failureOrToken.fold((failure) async* {
+        yield ErrorProfileState(
+          profile: event.profile,
+        );
+      }, (message) async* {
+        yield GoToSigninState();
+      });
     }
   }
 }

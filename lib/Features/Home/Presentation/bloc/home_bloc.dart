@@ -3,21 +3,15 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:Ijakhdem/Core/Utils/parameters.dart';
-import 'package:Ijakhdem/Features/Home/Domain/Usecases/logout.dart';
-import 'package:Ijakhdem/Features/Home/Domain/Usecases/resetPassword.dart';
+import 'package:Ijakhdem/Features/Profile/Domain/Usecases/logout.dart';
+import 'package:Ijakhdem/Features/Profile/Domain/Usecases/resetPassword.dart';
 import 'package:Ijakhdem/Features/Signin/Domain/Entities/profileEntity.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final ResetPassword resetPassword;
-  final Logout logout;
-
-  HomeBloc({
-    @required this.resetPassword,
-    @required this.logout,
-  });
+  HomeBloc();
 
   @override
   HomeState get initialState => EmptyHomeState();

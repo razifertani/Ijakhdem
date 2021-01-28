@@ -1,10 +1,10 @@
 import 'package:Ijakhdem/Core/Network/networkInfo.dart';
-import 'package:Ijakhdem/Features/Home/Data/Datasource/Implementations/homeRemoteDatasourceImpl.dart';
-import 'package:Ijakhdem/Features/Home/Data/Datasource/homeRemoteDatasource.dart';
-import 'package:Ijakhdem/Features/Home/Data/Repositories/homeRepositoryImpl.dart';
-import 'package:Ijakhdem/Features/Home/Domain/Repositories/homeRepository.dart';
-import 'package:Ijakhdem/Features/Home/Domain/Usecases/logout.dart';
-import 'package:Ijakhdem/Features/Home/Domain/Usecases/resetPassword.dart';
+import 'package:Ijakhdem/Features/Profile/Data/Datasource/profileRemoteDatasource.dart';
+import 'package:Ijakhdem/Features/Profile/Data/Datasource/Implementations/profileRemoteDatasourceImpl.dart';
+import 'package:Ijakhdem/Features/Profile/Data/Repositories/profileRepositoryImpl.dart';
+import 'package:Ijakhdem/Features/Profile/Domain/Repositories/profileRepository.dart';
+import 'package:Ijakhdem/Features/Profile/Domain/Usecases/logout.dart';
+import 'package:Ijakhdem/Features/Profile/Domain/Usecases/resetPassword.dart';
 import 'package:Ijakhdem/Features/Home/Presentation/bloc/home_bloc.dart';
 import 'package:Ijakhdem/Features/Messages/Presentation/bloc/messages_bloc.dart';
 import 'package:Ijakhdem/Features/MyJobs/Presentation/bloc/myJobs_bloc.dart';
@@ -59,21 +59,21 @@ void init() {
 
   // ? Bloc
   sl.registerFactory(() => HomeBloc(
-        logout: sl(),
-        resetPassword: sl(),
+      // logout: sl(),
+      // resetPassword: sl(),
       ));
 
   // ? Use cases
-  sl.registerLazySingleton(() => Logout(sl()));
-  sl.registerLazySingleton(() => ResetPassword(sl()));
+  // sl.registerLazySingleton(() => Logout(sl()));
+  // sl.registerLazySingleton(() => ResetPassword(sl()));
 
-  // ? Repository
-  sl.registerLazySingleton<HomeRepository>(
-      () => HomeRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+  // // ? Repository
+  // sl.registerLazySingleton<HomeRepository>(
+  //     () => HomeRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
 
-  // ? Data sources
-  sl.registerLazySingleton<HomeRemoteDataSource>(
-      () => HomeRemoteDataSourceImpl(client: sl()));
+  // // ? Data sources
+  // sl.registerLazySingleton<HomeRemoteDataSource>(
+  //     () => HomeRemoteDataSourceImpl(client: sl()));
 
   //* ---------------------------------  Feature MyJobs  --------------------------
 
@@ -129,19 +129,22 @@ void init() {
   //* ---------------------------------  Feature Profile  --------------------------
 
   // ? Bloc
-  sl.registerFactory(() => ProfileBloc());
+  sl.registerFactory(() => ProfileBloc(
+        resetPassword: sl(),
+        logout: sl(),
+      ));
 
   // ? Use cases
-  // sl.registerLazySingleton(() => Logout(sl()));
-  // sl.registerLazySingleton(() => ResetPassword(sl()));
+  sl.registerLazySingleton(() => Logout(sl()));
+  sl.registerLazySingleton(() => ResetPassword(sl()));
 
   // ? Repository
-  // sl.registerLazySingleton<HomeRepository>(
-  //     () => HomeRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<ProfileRepository>(
+      () => ProfileRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
 
   // ? Data sources
-  // sl.registerLazySingleton<HomeRemoteDataSource>(
-  //     () => HomeRemoteDataSourceImpl(client: sl()));
+  sl.registerLazySingleton<ProfileRemoteDataSource>(
+      () => ProfileRemoteDataSourceImpl(client: sl()));
 
   //*--------------------------------------- External  --------------------------------------
 

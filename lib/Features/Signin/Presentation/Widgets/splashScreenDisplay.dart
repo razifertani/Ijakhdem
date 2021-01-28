@@ -21,7 +21,7 @@ class _SplashScreenDisplayState extends State<SplashScreenDisplay> {
   void initState() {
     super.initState();
 
-    Timer(Duration(milliseconds: 1000), () {
+    Timer(Duration(milliseconds: 2000), () {
       stayLoggedIn();
     });
   }
