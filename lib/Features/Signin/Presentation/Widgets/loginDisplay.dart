@@ -47,12 +47,14 @@ class _LoginDisplayState extends State<LoginDisplay> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width * 0.04 / 14.5;
+    double screenWidthh = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height * 0.02 / 14;
+    double screenHeightt = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.fromLTRB(screenWidth * 16, screenWidth * 52,
+          padding: EdgeInsets.fromLTRB(screenWidth * 16, screenWidth * 30,
               screenWidth * 16, screenWidth * 16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -61,19 +63,20 @@ class _LoginDisplayState extends State<LoginDisplay> {
               Center(
                 child: Image.asset(
                   "Assets/Images/logo.png",
-                  height: screenHeight * 80,
-                  width: screenWidth * 201.64,
+                  fit: BoxFit.fitHeight,
+                  height: screenHeight * 150,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 40, bottom: 37),
                 child: Center(
-                    child: Image.asset(
-                  "Assets/Images/splash.png",
-                  fit: BoxFit.cover,
-                  height: screenWidth * 130, //145.95,
-                  width: screenWidth * 150, //197.57,
-                )),
+                  child: Image.asset(
+                    "Assets/Images/splash.png",
+                    height: screenWidth * 130, //145.95,
+                    width: screenWidth * 150, //197.57,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
               Text(
                 'Login',
@@ -252,9 +255,9 @@ class _LoginDisplayState extends State<LoginDisplay> {
                 height: screenHeight * 40,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  InkWell(
+                  GestureDetector(
                     onTap: () {
                       dispatchLoginFacebook();
                     },
@@ -265,7 +268,9 @@ class _LoginDisplayState extends State<LoginDisplay> {
                           height: screenWidth * 21,
                           width: screenWidth * 21,
                         ),
-                        SizedBox(width: 2),
+                        Container(
+                          width: screenWidth * 5,
+                        ),
                         Text(
                           'USING FACEBOOK',
                           style: TextStyle(
@@ -281,7 +286,7 @@ class _LoginDisplayState extends State<LoginDisplay> {
                     width: screenWidth * 1,
                     color: Color(0xff231F20),
                   ),
-                  InkWell(
+                  GestureDetector(
                     onTap: () {
                       dispatchLoginGoogle();
                     },
@@ -292,7 +297,9 @@ class _LoginDisplayState extends State<LoginDisplay> {
                           height: screenWidth * 21,
                           width: screenWidth * 21,
                         ),
-                        SizedBox(width: 2),
+                        Container(
+                          width: screenWidth * 5,
+                        ),
                         Text(
                           'USING GOOGLE',
                           style: TextStyle(
@@ -346,7 +353,7 @@ class _LoginDisplayState extends State<LoginDisplay> {
     );
   }
 
-  void dispatchLogin(String email, String password) {
+  dispatchLogin(String email, String password) {
     BlocProvider.of<LoginBloc>(context).dispatch(SigninEvent(
       email: email,
       password: password,
@@ -354,19 +361,19 @@ class _LoginDisplayState extends State<LoginDisplay> {
     ));
   }
 
-  void dispatchLoginFacebook() {
-    BlocProvider.of<LoginBloc>(context).dispatch(SigningGoogleEvent());
+  dispatchLoginGoogle() {
+    // BlocProvider.of<LoginBloc>(context).dispatch(SigningGoogleEvent());
   }
 
-  void dispatchLoginGoogle() {
-    BlocProvider.of<LoginBloc>(context).dispatch(SigningFacebookEvent());
+  dispatchLoginFacebook() {
+    // BlocProvider.of<LoginBloc>(context).dispatch(SigningFacebookEvent());
   }
 
-  void dispatchGoToSignup() {
+  dispatchGoToSignup() {
     BlocProvider.of<LoginBloc>(context).dispatch(GoToSignupEvent());
   }
 
-  void dispatchGoToForgotPassword() {
+  dispatchGoToForgotPassword() {
     BlocProvider.of<LoginBloc>(context).dispatch(GoToForgotPasswordEvent());
   }
 }

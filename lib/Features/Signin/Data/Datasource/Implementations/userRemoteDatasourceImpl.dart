@@ -8,6 +8,7 @@ import 'package:Ijakhdem/Features/Signin/Domain/Entities/profileEntity.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:mercury_client/mercury_client.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   final http.Client client;
@@ -19,94 +20,62 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     print('Start: ' + DateTime.now().toString());
     // String idUser, idLanguage, idSession;
 
-    var client = HttpClient('https://foundme-dev.hotline.direct');
+    final loginResponse = await http.get(
+      'http://92.222.181.118/email_sign_in?&mail=${loginParams.email}&password=${loginParams.password}',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
 
-    var loginResponse = await client.get('email_sign_in?', parameters: {
-      'mail': loginParams.email,
-      'password': loginParams.password,
-    });
+    if (loginResponse.statusCode == 200) {
+      String idUser = json.decode(loginResponse.body)['id_user'];
+      // String idLanguage = json.decode(loginResponse.body)['id_language'];
+      String idSession = 'test';
 
-    if (loginResponse.status == 200) {
-      //   print('end login: ' + DateTime.now().toString());
+      final viewResponse = await http.get(
+        "http://92.222.181.118/view_user?id_user=$idUser",
+        headers: {
+          'Content-Type': 'application/json',
+          'idSession': idSession,
+        },
+      );
+      if (viewResponse.statusCode == 200) {
+        Profile profile = Profile.fromJson(json.decode(viewResponse.body));
+        profile.generalInfo.idUser = idUser;
+        profile.generalInfo.idSession = idSession;
+        // profile.generalInfo.type = 'Email';
+        profile.parameters = Parameters(current: 0);
+        print(profile.generalInfo.idUser);
 
-      //   idUser = json.decode(loginResponse.body)['id_user'];
-      //   idLanguage = json.decode(loginResponse.body)['id_language'];
-      //   idSession = 'test';
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setBool("stayConnected", true);
+        // prefs.setBool("stayConnected", false);
+        prefs.setString("email", loginParams.email);
+        prefs.setString("password", loginParams.password);
 
-      //   final viewResponse = await http.get(
-      //     "https://foundme-dev.hotline.direct/view_user?id_user=$idUser",
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //       'idSession': idSession,
-      //     },
-      //   );
-      //   if (viewResponse.statusCode == 200) {
-      //     Profile profile;
-      //     // final profile = Profile.fromJson(json.decode(viewResponse.body));
-      //     // print(profile.userGeneralInfo.idUser);
-      //     // profile.userGeneralInfo.idUser = idUser;
-      //     // profile.userGeneralInfo.idSession = idSession;
-      //     // profile.userGeneralInfo.type = 'Email';
-      //     // profile.parameters = Parameters();
-
-      //     // final responseFetchApiKey = await http.get(
-      //     //   'https://foundme-dev.hotline.direct/fetch_api_key?username=${loginParams.email}&password=${loginParams.password}',
-      //     //   headers: {
-      //     //     'Content-Type': 'application/json',
-      //     //     'idSession': idSession,
-      //     //   },
-      //     // );
-
-      //     // if (responseFetchApiKey.statusCode == 200) {
-      //     //   profile.userGeneralInfo.apiKey =
-      //     //       json.decode(responseFetchApiKey.body)['api_key'];
-      //     // }
-
-      //     SharedPreferences prefs = await SharedPreferences.getInstance();
-      //     prefs.setBool("stayConnected", true);
-      //     prefs.setString("email", loginParams.email);
-      //     prefs.setString("password", loginParams.password);
-
-      //     print('End: ' + DateTime.now().toString());
-      //     return profile;
-      //   } else if (viewResponse.statusCode == 401) {
-      //     final profile = Profile(
-      //         //   userGeneralInfo: UserGeneralInfo(idUser: 'Session expired'),
-      //         );
-      //     return profile;
-      //   } else {
-      //     throw ServerExeption();
-      //   }
-      // } else if (loginResponse.status == 403) {
-      //   if (json.decode(loginResponse.body)['message'] == 'User does not exist') {
-      //     final profile = Profile(
-      //         //   userGeneralInfo: UserGeneralInfo(idUser: 'User does not exist'),
-      //         );
-      //     return profile;
-      //   }
-      //   if (json.decode(loginResponse.body)['message'] == 'Wrong password') {
-      //     final profile = Profile(
-      //         // userGeneralInfo: UserGeneralInfo(idUser: 'Wrong password'),
-      //         );
-      //     return profile;
-      //   }
-      //   if (json.decode(loginResponse.body)['message'] ==
-      //       'You cannot process login until you activate your account') {
-      //     final profile = Profile(
-      //         // userGeneralInfo: UserGeneralInfo(
-      //         //     idUser:
-      //         //         'You cannot process login until you activate your account'),
-      //         );
-      //     return profile;
-      //   }
-      //   final profile = Profile(
-      //       // userGeneralInfo: UserGeneralInfo(idUser: 'Login issues'),
-      //       );
-      //   return profile;
-      // } else {
-      //   throw ServerExeption();
+        print('End: ' + DateTime.now().toString());
+        return profile;
+      } else if (viewResponse.statusCode == 401) {
+        final profile = Profile(
+          parameters: Parameters(
+            message: 'Session expired',
+          ),
+        );
+        return profile;
+      } else {
+        throw ServerExeption();
+      }
+    } else if (loginResponse.statusCode == 406 ||
+        loginResponse.statusCode == 403) {
+      final profile = Profile(
+        parameters: Parameters(
+          message: json.decode(loginResponse.body)['message'],
+        ),
+      );
+      return profile;
+    } else {
+      throw ServerExeption();
     }
-    return Profile();
   }
 
   @override
@@ -124,7 +93,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   @override
   Future<String> register(RegisterParams registerParams) async {
     final response = await http.get(
-      "https://ws.interface-crm.com:444/email_sign_up?first_name=${registerParams.firstName}&last_name=${registerParams.lastName}&password=${registerParams.password}&confirm_email=true&primary_email=${registerParams.email}",
+      "http://92.222.181.118/email_sign_up?first_name=${registerParams.firstName}&last_name=${registerParams.lastName}&email=${registerParams.email}&pwd=${registerParams.password}",
       headers: {
         'Content-Type': 'application/json',
       },

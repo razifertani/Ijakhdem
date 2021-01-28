@@ -55,3 +55,27 @@ class GoToProfileState extends HomeState {
     @required this.profile,
   }) : super([profile]);
 }
+
+class GoToRecommendedJobsState extends HomeState {
+  final Profile profile;
+
+  GoToRecommendedJobsState({
+    @required this.profile,
+  }) : super([profile]);
+}
+
+class GoToListCategoriesState extends HomeState {
+  final Profile profile;
+
+  GoToListCategoriesState({
+    @required this.profile,
+  }) : super([profile]);
+}
+
+class GoToSpecificJobState extends HomeState {
+  final Profile profile;
+
+  GoToSpecificJobState({
+    @required this.profile,
+  }) : super([profile]);
+}

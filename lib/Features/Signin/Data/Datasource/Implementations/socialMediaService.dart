@@ -2,16 +2,38 @@
 import 'package:Ijakhdem/Features/Signin/Domain/Entities/profileEntity.dart';
 // import 'package:http/http.dart' as http;
 
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:flutter_facebook_login/flutter_facebook_login.dart';
-// import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class SocialMediaService {
-  // final FirebaseAuth auth = FirebaseAuth.instance;
-  // final GoogleSignIn googleSignIn = GoogleSignIn();
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+  // FirebaseUser firebaseUser;
   // final FacebookLogin facebookSignIn = FacebookLogin();
 
   Future<Profile> signInWithGoogle() async {
+    try {
+      // GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+      // GoogleSignInAuthentication googleSignInAuthentication =
+      //     await googleSignInAccount.authentication;
+      // AuthCredential credential = GoogleAuthProvider.getCredential(
+      //   accessToken: googleSignInAuthentication.accessToken,
+      //   idToken: googleSignInAuthentication.idToken,
+      // );
+    } catch (e) {
+      print(e.toString());
+    }
+
+    // AuthResult authResult; // = await auth.signInWithCredential(credential);
+    // firebaseUser = authResult.user;
+    // assert(!firebaseUser.isAnonymous);
+    // assert(await firebaseUser.getIdToken() != null);
+    // FirebaseUser currentUser = await auth.currentUser();
+    // assert(firebaseUser.uid == currentUser.uid);
+    // // model.state =ViewState.Idle;
+    // print("User Name: ${firebaseUser.displayName}");
+    // print("User Email ${firebaseUser.email}");
+
     // final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
     // final GoogleSignInAuthentication googleSignInAuthentication =
     //     await googleSignInAccount.authentication;
@@ -37,6 +59,7 @@ class SocialMediaService {
     //     ? profile.userGeneralInfo.tel = user.phoneNumber
     //     : profile.userGeneralInfo.tel = 'Nan';
     // profile.userGeneralInfo.type = 'Google';
+
     Profile profile = Profile();
     return profile;
   }
@@ -47,7 +70,7 @@ class SocialMediaService {
 
   Future<Profile> loginWithFB() async {
     // final result = await facebookSignIn.logIn(['email']);
-    Profile profile = Profile();
+    // Profile profile = Profile();
     // if (result.status == FacebookLoginStatus.loggedIn) {
     //   final token = result.accessToken.token;
     //   final response = await http.get(
@@ -58,7 +81,7 @@ class SocialMediaService {
     //   profile.userGeneralInfo.mail = json.decode(response.body)['email'];
     //   profile.userGeneralInfo.type = 'Facebook';
 
-    return profile;
+    // return profile;
     // } else {
     //   throw ServerExeption();
   }

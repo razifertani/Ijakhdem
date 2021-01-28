@@ -52,5 +52,35 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         profile: event.profile,
       );
     }
+
+    if (event is GoToProfileWidgetEvent) {
+      yield GoToProfileWidgetState(
+        profile: event.profile,
+      );
+    }
+
+    if (event is GoToBalanceWidgetEvent) {
+      yield GoToBalanceWidgetState(
+        profile: event.profile,
+      );
+    }
+
+    if (event is GoToNotificationsWidgetEvent) {
+      yield GoToNotificationsWidgetState(
+        profile: event.profile,
+      );
+    }
+
+    if (event is GoToNotificationsSettingsWidgetEvent) {
+      yield GoToNotificationsSettingsWidgetState(
+        profile: event.profile,
+      );
+    }
+
+    if (event is GoToProfileDisplayEvent) {
+      yield GoToProfileDisplayState(
+        profile: event.profile,
+      );
+    }
   }
 }

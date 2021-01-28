@@ -1,3 +1,6 @@
+import 'package:Ijakhdem/Features/Home/Presentation/Widgets/listCategoriesDisplay.dart';
+import 'package:Ijakhdem/Features/Home/Presentation/Widgets/recommendedJobsDisplay.dart';
+import 'package:Ijakhdem/Features/Home/Presentation/Widgets/specificJobDisplay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Ijakhdem/Core/Utils/loadingWidget.dart';
@@ -26,20 +29,22 @@ class HomePage extends StatelessWidget {
           );
         }
 
-        if (state is GoToMyJobsState) {
-          //
+        if (state is GoToRecommendedJobsState) {
+          return RecommendedJobsDisplay(
+            profile: state.profile,
+          );
         }
 
-        if (state is GoToPostJobState) {
-          // Navigator
+        if (state is GoToListCategoriesState) {
+          return ListCategoriesDisplay(
+            profile: state.profile,
+          );
         }
 
-        if (state is GoToMessagesState) {
-          // Navigator
-        }
-
-        if (state is GoToProfileState) {
-          // Navigator
+        if (state is GoToSpecificJobState) {
+          return SpecificJobDisplay(
+            profile: state.profile,
+          );
         }
 
         if (state is LoadingHomeState) {

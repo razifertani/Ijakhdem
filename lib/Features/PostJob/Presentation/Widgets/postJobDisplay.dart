@@ -1,5 +1,5 @@
 import 'package:Ijakhdem/Core/Utils/appColors.dart';
-import 'package:Ijakhdem/Core/Utils/appDrawer.dart';
+import 'package:Ijakhdem/Core/Utils/appBottomNavigationBar.dart';
 import 'package:Ijakhdem/Features/Signin/Domain/Entities/profileEntity.dart';
 import 'package:flutter/material.dart';
 
@@ -28,11 +28,11 @@ class _PostJobDisplayState extends State<PostJobDisplay> {
         centerTitle: true,
         elevation: 10,
       ),
-      drawer: AppDrawer(
-        profile: profile,
-      ),
       body: Center(
         child: Text('Post Job'),
+      ),
+      bottomNavigationBar: AppBottomNavigationBar(
+        profile: profile,
       ),
     );
   }

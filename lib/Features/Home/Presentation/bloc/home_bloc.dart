@@ -26,6 +26,24 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> mapEventToState(
     HomeEvent event,
   ) async* {
+    if (event is GoToRecommendedJobsEvent) {
+      yield GoToRecommendedJobsState(
+        profile: event.profile,
+      );
+    }
+
+    if (event is GoToListCategoriesEvent) {
+      yield GoToListCategoriesState(
+        profile: event.profile,
+      );
+    }
+
+    if (event is GoToSpecificJobEvent) {
+      yield GoToSpecificJobState(
+        profile: event.profile,
+      );
+    }
+
     if (event is GoToHomeEvent) {
       yield GoToHomeState(
         profile: event.profile,
