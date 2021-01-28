@@ -32,6 +32,7 @@ class _MessagesDisplayState extends State<MessagesDisplay> {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: Text('Messages'),

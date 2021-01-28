@@ -32,6 +32,7 @@ class _PostJobDisplayState extends State<PostJobDisplay> {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: Text('Post Job'),

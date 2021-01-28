@@ -1,6 +1,7 @@
 import 'package:Ijakhdem/Features/Profile/Presentation/Widgets/Components/balanceWidget.dart';
 import 'package:Ijakhdem/Features/Profile/Presentation/Widgets/Components/notificationsSettingsWidget.dart';
 import 'package:Ijakhdem/Features/Profile/Presentation/Widgets/Components/notificationsWidget.dart';
+import 'package:Ijakhdem/Features/Profile/Presentation/Widgets/Components/onBoardingDisplay.dart';
 import 'package:Ijakhdem/Features/Profile/Presentation/Widgets/Components/profileWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,6 +57,12 @@ class ProfilePage extends StatelessWidget {
 
         if (state is GoToNotificationsSettingsWidgetState) {
           return NotificationsSettingsWidget(
+            profile: state.profile,
+          );
+        }
+
+        if (state is GoToOnBoardingState) {
+          return OnBoardingDisplay(
             profile: state.profile,
           );
         }

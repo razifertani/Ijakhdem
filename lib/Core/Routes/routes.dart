@@ -17,40 +17,82 @@ class RouteGenerator {
         );
 
       case '/homeProvider':
+        return PageRouteBuilder(
+          pageBuilder: (context, animation1, animation2) {
+            return HomeProvider(
+              profile: settings.arguments,
+            );
+          },
+        );
+      /*
         return MaterialPageRoute(
           builder: (_) => HomeProvider(
             profile: settings.arguments,
           ),
         );
+  */
 
       case '/myJobsProvider':
+        return PageRouteBuilder(
+          pageBuilder: (context, animation1, animation2) {
+            return MyJobsProvider(
+              profile: settings.arguments,
+            );
+          },
+        );
+      /*
         return MaterialPageRoute(
           builder: (_) => MyJobsProvider(
             profile: settings.arguments,
           ),
         );
-
+      */
       case '/postJobProvider':
+        return PageRouteBuilder(
+          pageBuilder: (context, animation1, animation2) {
+            return PostJobProvider(
+              profile: settings.arguments,
+            );
+          },
+        );
+      /*
         return MaterialPageRoute(
           builder: (_) => PostJobProvider(
             profile: settings.arguments,
           ),
         );
-
+        */
       case '/messagesProvider':
+        return PageRouteBuilder(
+          pageBuilder: (context, animation1, animation2) {
+            return MessagesProvider(
+              profile: settings.arguments,
+            );
+          },
+        );
+      /*
         return MaterialPageRoute(
           builder: (_) => MessagesProvider(
             profile: settings.arguments,
           ),
         );
+*/
 
       case '/profileProvider':
+        return PageRouteBuilder(
+          pageBuilder: (context, animation1, animation2) {
+            return ProfileProvider(
+              profile: settings.arguments,
+            );
+          },
+        );
+        /*
         return MaterialPageRoute(
           builder: (_) => ProfileProvider(
             profile: settings.arguments,
           ),
         );
-
+*/
         return errorRoute();
       default:
         return errorRoute();

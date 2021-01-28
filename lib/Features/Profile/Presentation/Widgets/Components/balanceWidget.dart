@@ -1,5 +1,8 @@
+import 'package:Ijakhdem/Core/Utils/appColors.dart';
+import 'package:Ijakhdem/Features/Profile/Presentation/bloc/profile_bloc.dart';
 import 'package:Ijakhdem/Features/Signin/Domain/Entities/profileEntity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BalanceWidget extends StatefulWidget {
   final Profile profile;
@@ -13,14 +16,22 @@ class BalanceWidget extends StatefulWidget {
 class _BalanceWidgetState extends State<BalanceWidget> {
   @override
   Widget build(BuildContext context) {
+    Profile profile = widget.profile;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blueAccent,
           shadowColor: Colors.blueAccent,
           elevation: 0,
-          flexibleSpace: Container(
-            color: Colors.blueAccent,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              dispatchGoToProfileDisplay(profile);
+            },
           ),
         ),
         backgroundColor: Colors.blueAccent,
@@ -73,6 +84,14 @@ class _BalanceWidgetState extends State<BalanceWidget> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  dispatchGoToProfileDisplay(profile) {
+    BlocProvider.of<ProfileBloc>(context).dispatch(
+      GoToProfileDisplayEvent(
+        profile: profile,
       ),
     );
   }

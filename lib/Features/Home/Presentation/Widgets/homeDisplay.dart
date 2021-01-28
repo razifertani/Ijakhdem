@@ -42,7 +42,23 @@ class _HomeDisplayState extends State<HomeDisplay> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: Container(
+      appBar: AppBar(
+        title: Text(
+          'Home',
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+      ),
+      body: Center(
+        child: Text('Home'),
+      ),
+      /*
+      Container(
         padding: EdgeInsets.fromLTRB(
           screenWidth * 0.02,
           screenHeight * 0,
@@ -295,6 +311,7 @@ class _HomeDisplayState extends State<HomeDisplay> {
           ),
         ),
       ),
+      */
       bottomNavigationBar: AppBottomNavigationBar(
         profile: profile,
       ),

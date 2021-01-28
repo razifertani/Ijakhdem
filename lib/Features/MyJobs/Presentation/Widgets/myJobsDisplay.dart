@@ -32,6 +32,7 @@ class _MyJobsDisplayState extends State<MyJobsDisplay> {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: Text('My Jobs'),

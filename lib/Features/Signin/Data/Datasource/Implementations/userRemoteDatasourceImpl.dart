@@ -49,7 +49,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setBool("stayConnected", true);
-        // prefs.setBool("stayConnected", false);
+        prefs.setBool("stayConnected", false);
         prefs.setString("email", loginParams.email);
         prefs.setString("password", loginParams.password);
 

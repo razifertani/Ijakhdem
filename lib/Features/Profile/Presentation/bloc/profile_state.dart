@@ -95,3 +95,11 @@ class GoToProfileDisplayState extends ProfileState {
     @required this.profile,
   }) : super([profile]);
 }
+
+class GoToOnBoardingState extends ProfileState {
+  final Profile profile;
+
+  GoToOnBoardingState({
+    @required this.profile,
+  }) : super([profile]);
+}

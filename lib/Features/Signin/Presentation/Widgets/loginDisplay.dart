@@ -19,8 +19,10 @@ class LoginDisplay extends StatefulWidget {
 }
 
 class _LoginDisplayState extends State<LoginDisplay> {
-  String email = 'razifertani1@gmail.com';
-  String password = 'Razi123@';
+  // String email = 'razifertani1@gmail.com';
+  // String password = 'Razi123@';
+  String email = '';
+  String password = '';
   String message = 'null';
   bool checkerEmail = true;
   bool checkerPassword = true;
@@ -47,9 +49,7 @@ class _LoginDisplayState extends State<LoginDisplay> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width * 0.04 / 14.5;
-    double screenWidthh = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height * 0.02 / 14;
-    double screenHeightt = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: SingleChildScrollView(

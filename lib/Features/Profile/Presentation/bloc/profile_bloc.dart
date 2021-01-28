@@ -82,5 +82,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         profile: event.profile,
       );
     }
+
+    if (event is GoToOnBoardingEvent) {
+      yield GoToOnBoardingState(
+        profile: event.profile,
+      );
+    }
   }
 }

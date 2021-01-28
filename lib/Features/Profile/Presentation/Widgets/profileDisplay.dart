@@ -243,7 +243,7 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
                 color: AppColors.primaryColor,
               ),
               onTap: () {
-                dispatchGoToNotificationsSettingsWidget(profile);
+                dispatchGoToOnBorading(profile);
               },
             ),
             Divider(),
@@ -380,6 +380,14 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
   dispatchGoToNotificationsSettingsWidget(Profile profile) {
     BlocProvider.of<ProfileBloc>(context).dispatch(
       GoToNotificationsSettingsWidgetEvent(
+        profile: profile,
+      ),
+    );
+  }
+
+  dispatchGoToOnBorading(Profile profile) {
+    BlocProvider.of<ProfileBloc>(context).dispatch(
+      GoToOnBoardingEvent(
         profile: profile,
       ),
     );

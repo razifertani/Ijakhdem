@@ -83,3 +83,11 @@ class GoToProfileDisplayEvent extends ProfileEvent {
     @required this.profile,
   }) : super([profile]);
 }
+
+class GoToOnBoardingEvent extends ProfileEvent {
+  final Profile profile;
+
+  GoToOnBoardingEvent({
+    @required this.profile,
+  }) : super([profile]);
+}
