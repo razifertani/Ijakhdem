@@ -49,7 +49,7 @@ android {
         release {
             keyAlias 'ijakhdem'
             keyPassword 'ijakhdem'
-            storeFile file("././ijakhdem.jks")
+            storeFile file("ijakhdem.jks")
             storePassword 'ijakhdem'
         }
     }
