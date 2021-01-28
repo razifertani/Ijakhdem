@@ -21,10 +21,13 @@ class _ListCategoriesDisplayState extends State<ListCategoriesDisplay> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      // onPressed: () => Scaffold.of(context).openDrawer(),
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
+        title: Text(
+          'Categories',
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -32,6 +35,9 @@ class _ListCategoriesDisplayState extends State<ListCategoriesDisplay> {
           ),
           onPressed: () => dispatchGoToHome(profile),
         ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
       ),
       body: ListView.separated(
         separatorBuilder: (BuildContext context, int index) {

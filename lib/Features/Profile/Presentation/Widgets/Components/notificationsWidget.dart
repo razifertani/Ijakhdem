@@ -1,5 +1,8 @@
+import 'package:Ijakhdem/Core/Utils/appColors.dart';
+import 'package:Ijakhdem/Features/Profile/Presentation/bloc/profile_bloc.dart';
 import 'package:Ijakhdem/Features/Signin/Domain/Entities/profileEntity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NotificationsWidget extends StatefulWidget {
   final Profile profile;
@@ -14,18 +17,54 @@ class NotificationsWidget extends StatefulWidget {
 class _NotificationsWidgetState extends State<NotificationsWidget> {
   @override
   Widget build(BuildContext context) {
+    Profile profile = widget.profile;
+
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(150),
-        child: SafeArea(
-          child: ListTile(
-            title: Text(
-              "Notifications",
-              style: TextStyle(fontSize: 24),
-            ),
-            subtitle: Text("Here is what's going on today"),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.white,
+      //   title: ,
+      //   leading: IconButton(
+      //     icon: Icon(
+      //       Icons.arrow_back,
+      //       color: AppColors.primaryColor,
+      //     ),
+      //     color: AppColors.blueColor,
+      //     onPressed: () {
+      //       dispatchGoToProfileDisplay(profile);
+      //     },
+      //   ),
+      //   flexibleSpace: SafeArea(
+      //     child: Column(
+      //       mainAxisAlignment: MainAxisAlignment.center,
+      //       children: [
+      //         Text(
+      //           "Notification settings",
+      //           style: TextStyle(fontSize: 20),
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
+      appBar: AppBar(
+        title: Text(
+          'Notifications',
+          style: TextStyle(
+            color: Colors.black,
           ),
         ),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: AppColors.primaryColor,
+          ),
+          color: AppColors.blueColor,
+          onPressed: () {
+            dispatchGoToProfileDisplay(profile);
+          },
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
       ),
       body: ListView.builder(
           itemCount: 3,
@@ -50,6 +89,14 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
               ]),
             );
           }),
+    );
+  }
+
+  dispatchGoToProfileDisplay(profile) {
+    BlocProvider.of<ProfileBloc>(context).dispatch(
+      GoToProfileDisplayEvent(
+        profile: profile,
+      ),
     );
   }
 }

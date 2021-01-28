@@ -42,12 +42,6 @@ class _HomeDisplayState extends State<HomeDisplay> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      // onPressed: () => Scaffold.of(context).openDrawer(),
-      appBar: AppBar(
-        title: Text('Browse'),
-        centerTitle: true,
-        elevation: 10,
-      ),
       body: Container(
         padding: EdgeInsets.fromLTRB(
           screenWidth * 0.02,

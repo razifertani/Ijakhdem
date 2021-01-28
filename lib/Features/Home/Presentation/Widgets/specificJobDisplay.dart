@@ -1,3 +1,4 @@
+import 'package:Ijakhdem/Core/Utils/appColors.dart';
 import 'package:Ijakhdem/Features/Home/Presentation/bloc/home_bloc.dart';
 import 'package:Ijakhdem/Features/Signin/Domain/Entities/profileEntity.dart';
 import 'package:flutter/material.dart';
@@ -19,16 +20,22 @@ class _SpecificJobDisplayState extends State<SpecificJobDisplay> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Recommended Jobs'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(
+            Icons.arrow_back,
+            color: AppColors.primaryColor,
+          ),
           onPressed: () => dispatchGoToHome(profile),
         ),
+        backgroundColor: Colors.white,
+        elevation: 0,
         centerTitle: true,
-        elevation: 10,
+        automaticallyImplyLeading: false,
       ),
-      body: Text(
-        profile.generalInfo.firstName,
+      body: Center(
+        child: Text(
+          'Job',
+        ),
       ),
     );
   }

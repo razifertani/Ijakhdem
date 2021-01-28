@@ -22,11 +22,16 @@ class _PostJobDisplayState extends State<PostJobDisplay> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      // onPressed: () => Scaffold.of(context).openDrawer(),
       appBar: AppBar(
-        title: Text('Browse'),
+        title: Text(
+          'Post Job',
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
         centerTitle: true,
-        elevation: 10,
       ),
       body: Center(
         child: Text('Post Job'),

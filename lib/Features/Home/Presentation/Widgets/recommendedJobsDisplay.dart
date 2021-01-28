@@ -22,13 +22,23 @@ class _RecommendedJobsDisplayState extends State<RecommendedJobsDisplay> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Recommended Jobs'),
+        title: Text(
+          'Recommended Jobs',
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(
+            Icons.arrow_back,
+            color: AppColors.primaryColor,
+          ),
           onPressed: () => dispatchGoToHome(profile),
         ),
+        backgroundColor: Colors.white,
+        elevation: 0,
         centerTitle: true,
-        elevation: 10,
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: Container(
