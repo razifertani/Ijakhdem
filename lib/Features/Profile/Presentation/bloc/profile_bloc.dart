@@ -97,6 +97,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       );
     }
 
+    if (event is GoToTermsConditionsEvent) {
+      yield GoToTermsConditionsState(
+        profile: event.profile,
+      );
+    }
+
+    if (event is GoToPrivacyPoliceyEvent) {
+      yield GoToPrivacyPoliceyState(
+        profile: event.profile,
+      );
+    }
+
     if (event is LogoutEvent) {
       yield LoadingProfileState();
       final failureOrToken = await logout(event.profile);

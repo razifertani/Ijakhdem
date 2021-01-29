@@ -29,8 +29,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
     if (loginResponse.statusCode == 200) {
       String idUser = json.decode(loginResponse.body)['id_user'];
-      // String idLanguage = json.decode(loginResponse.body)['id_language'];
-      String idSession = 'test';
+      String idSession = json.decode(loginResponse.body)['idSession'];
 
       final viewResponse = await http.get(
         "http://92.222.181.118/view_user?id_user=$idUser",
@@ -41,11 +40,13 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       );
       if (viewResponse.statusCode == 200) {
         Profile profile = Profile.fromJson(json.decode(viewResponse.body));
-        profile.generalInfo.idUser = idUser;
-        profile.generalInfo.idSession = idSession;
+        profile.parameters = Parameters(
+          idUser: idUser,
+          idSession: idSession,
+          current: 0,
+        );
         // profile.generalInfo.type = 'Email';
-        profile.parameters = Parameters(current: 0);
-        print(profile.generalInfo.idUser);
+        print(profile.parameters.idUser);
 
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setBool("stayConnected", true);

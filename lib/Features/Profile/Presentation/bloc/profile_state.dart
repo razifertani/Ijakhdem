@@ -113,3 +113,19 @@ class LogoutState extends ProfileState {
 }
 
 class GoToSigninState extends ProfileState {}
+
+class GoToTermsConditionsState extends ProfileState {
+  final Profile profile;
+
+  GoToTermsConditionsState({
+    @required this.profile,
+  }) : super([profile]);
+}
+
+class GoToPrivacyPoliceyState extends ProfileState {
+  final Profile profile;
+
+  GoToPrivacyPoliceyState({
+    @required this.profile,
+  }) : super([profile]);
+}

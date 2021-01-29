@@ -269,7 +269,7 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
                 color: AppColors.primaryColor,
               ),
               onTap: () {
-                // Get.to(HomePage());
+                dispatchGoToPrivacyPoliceyDisplay(profile);
               },
             ),
             Divider(),
@@ -288,7 +288,7 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
                 color: AppColors.primaryColor,
               ),
               onTap: () {
-                // Get.to(HomePage());
+                dispatchGoToTermsConditionsDisplay(profile);
               },
             ),
             Divider(),
@@ -388,6 +388,22 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
   dispatchGoToOnBorading(Profile profile) {
     BlocProvider.of<ProfileBloc>(context).dispatch(
       GoToOnBoardingEvent(
+        profile: profile,
+      ),
+    );
+  }
+
+  dispatchGoToTermsConditionsDisplay(profile) {
+    BlocProvider.of<ProfileBloc>(context).dispatch(
+      GoToTermsConditionsEvent(
+        profile: profile,
+      ),
+    );
+  }
+
+  dispatchGoToPrivacyPoliceyDisplay(profile) {
+    BlocProvider.of<ProfileBloc>(context).dispatch(
+      GoToPrivacyPoliceyEvent(
         profile: profile,
       ),
     );

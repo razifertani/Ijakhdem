@@ -41,8 +41,8 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
 
   @override
   Future<String> logout(Profile profile) async {
-    final String idUser = profile.generalInfo.idUser;
-    final String idSession = profile.generalInfo.idSession;
+    final String idUser = profile.parameters.idUser;
+    final String idSession = profile.parameters.idSession;
 
     final response = await http.get(
       "http://92.222.181.118/logout?id_user=$idUser",

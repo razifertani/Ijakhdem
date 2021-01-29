@@ -45,8 +45,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
       final loginParams =
           LoginParams(email: event.email, password: event.password);
-      // final profile = Profile(firstName: 'Razi Fertani');
-      // yield LoadedState(profile: profile);
       final failureOrToken = await login(loginParams);
       yield* failureOrToken.fold((failure) async* {
         yield ErrorLoginState(

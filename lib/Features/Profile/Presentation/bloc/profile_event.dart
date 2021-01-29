@@ -99,3 +99,19 @@ class LogoutEvent extends ProfileEvent {
     @required this.profile,
   }) : super([profile]);
 }
+
+class GoToTermsConditionsEvent extends ProfileEvent {
+  final Profile profile;
+
+  GoToTermsConditionsEvent({
+    @required this.profile,
+  }) : super([profile]);
+}
+
+class GoToPrivacyPoliceyEvent extends ProfileEvent {
+  final Profile profile;
+
+  GoToPrivacyPoliceyEvent({
+    @required this.profile,
+  }) : super([profile]);
+}

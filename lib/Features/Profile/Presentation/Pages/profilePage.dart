@@ -3,6 +3,7 @@ import 'package:Ijakhdem/Features/Profile/Presentation/Widgets/Components/notifi
 import 'package:Ijakhdem/Features/Profile/Presentation/Widgets/Components/notificationsWidget.dart';
 import 'package:Ijakhdem/Features/Profile/Presentation/Widgets/Components/onBoardingDisplay.dart';
 import 'package:Ijakhdem/Features/Profile/Presentation/Widgets/Components/profileWidget.dart';
+import 'package:Ijakhdem/Features/Profile/Presentation/Widgets/Components/termsPrivacyDisplay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Ijakhdem/Core/Utils/loadingWidget.dart';
@@ -63,6 +64,18 @@ class ProfilePage extends StatelessWidget {
 
         if (state is GoToOnBoardingState) {
           return OnBoardingDisplay(
+            profile: state.profile,
+          );
+        }
+
+        if (state is GoToTermsConditionsState) {
+          return TermsOfUseDisplay(
+            profile: state.profile,
+          );
+        }
+
+        if (state is GoToPrivacyPoliceyState) {
+          return PrivacyPolicyDisplay(
             profile: state.profile,
           );
         }
