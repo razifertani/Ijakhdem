@@ -26,12 +26,17 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   List<String> _skills = ['Android', 'Flutter', 'React-Js'];
 
   bool show_all_state = false;
+  GlobalKey scaffold_key = new GlobalKey();
+
+  TextEditingController summaryController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     Profile profile = widget.profile;
 
     return Scaffold(
+      key: scaffold_key,
+
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(
@@ -215,10 +220,140 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600),
                                       ),
-                                      Icon(
-                                        Icons.rate_review,
+                                      IconButton(
+                                        icon: Icon(Icons.rate_review),
+                                        onPressed: () {
+                                          setState(() {
+                                            showDialog(
+                                                useSafeArea: true,
+
+                                                context: scaffold_key.currentContext,
+                                                builder: (context) {
+                                                  return Container(
+                                                    width: double.infinity,
+                                                    color: Colors.white,
+                                                    child: Column(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                      children: [
+                                                        AppBar(
+                                                          title: Text(
+                                                            "Edit profile",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black),
+                                                            textAlign:
+                                                            TextAlign
+                                                                .center,
+                                                          ),
+                                                          backgroundColor:
+                                                          Colors.white,
+                                                          iconTheme:
+                                                          IconThemeData(
+                                                            color: Colors
+                                                                .black, //change your color here
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          child: Container(
+                                                            child: Column(
+                                                              mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                              mainAxisSize:
+                                                              MainAxisSize
+                                                                  .max,
+                                                              children: [
+                                                                Padding(
+                                                                  padding:
+                                                                  const EdgeInsets.all(
+                                                                      8.0),
+                                                                  child: Column(
+                                                                      children: [
+                                                                        Row(
+                                                                          mainAxisAlignment:
+                                                                          MainAxisAlignment.spaceBetween,
+                                                                          crossAxisAlignment:
+                                                                          CrossAxisAlignment.center,
+                                                                          children: [
+                                                                            Text(
+                                                                              "Summary",
+                                                                              style: TextStyle(
+                                                                                color: Colors.black,
+                                                                                decoration: TextDecoration.none,
+                                                                                fontSize: 16,
+                                                                                fontWeight: FontWeight.w600,
+                                                                                fontStyle: FontStyle.normal,
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        Padding(
+                                                                          padding:
+                                                                          const EdgeInsets.only(top: 8.0),
+                                                                          child:
+                                                                          CupertinoTextField(
+
+                                                                            controller: summaryController,
+                                                                            textInputAction: TextInputAction.done,
+                                                                            minLines: 5,
+                                                                            maxLines: null,
+                                                                            // decoration: InputDecoration(border: InputBorder.none),
+                                                                            // enabled: summaryState,
+                                                                          ),
+                                                                        ),
+                                                                      ]),
+                                                                ),
+                                                                Expanded(
+                                                                  child: Align(
+                                                                    alignment: Alignment.bottomCenter,
+                                                                    child: SizedBox(
+                                                                      width: double
+                                                                          .infinity /
+                                                                          2,
+                                                                      child:
+                                                                      Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .all(
+                                                                            16.0),
+                                                                        child:
+                                                                        FlatButton(
+                                                                          color: Colors
+                                                                              .blueAccent,
+                                                                          highlightColor:
+                                                                          Colors.white,
+                                                                          onPressed:
+                                                                              () =>
+                                                                              print("test"),
+                                                                          child:
+                                                                          Padding(
+                                                                            padding: const EdgeInsets.only(
+                                                                                right: 50.0,
+                                                                                left: 50.0),
+                                                                            child:
+                                                                            Text(
+                                                                              "Save ",
+                                                                              style:
+                                                                              TextStyle(color: Colors.white, fontWeight: FontWeight.w400),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  );
+                                                });
+                                          });
+                                        },
                                         color: AppColors.primaryColor,
                                       )
+
                                     ],
                                   ),
                                   Padding(
@@ -260,6 +395,57 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   Column(
                                     children: [
                                       ///in case portfolio is inexistant
+                                      Padding(
+                                        padding:
+                                        const EdgeInsets.only(top: 8.0),
+                                        child: Container(
+                                          height: 150,
+                                          child: ListView.builder(
+                                            itemCount: 5,
+                                            scrollDirection: Axis.horizontal,
+                                            shrinkWrap: true,
+                                            itemBuilder: (context, i) {
+                                              return Container(
+                                                height: 80,
+                                                child: Card(
+                                                  elevation: 5,
+                                                  child: Padding(
+                                                    padding:
+                                                    const EdgeInsets.all(
+                                                        8.0),
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                      MainAxisSize.max,
+                                                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        Expanded(
+                                                          child: CircleAvatar(
+                                                            backgroundColor:
+                                                            Colors.white,
+                                                            radius: 50,
+                                                            backgroundImage:
+                                                            Image.asset(
+                                                                'Assets/Images/js.png')
+                                                                .image,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                          const EdgeInsets
+                                                              .only(
+                                                              top: 8.0),
+                                                          child: Text(
+                                                              "Javascript Project"),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ),
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(top: 8.0),
@@ -351,7 +537,184 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                           Icons.add_box,
                                           color: AppColors.primaryColor,
                                         ),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          showDialog(
+                                              useSafeArea: true,
+                                              context: scaffold_key.currentContext,
+                                              builder: (context) {
+                                                return Column(
+                                                  mainAxisSize:
+                                                  MainAxisSize.max,
+                                                  children: [
+                                                    Expanded(
+                                                      child: Container(
+                                                        width:
+                                                        double.infinity,
+                                                        color: Colors.white,
+                                                        child: Scaffold(
+                                                          body: Column(
+                                                            mainAxisSize:
+                                                            MainAxisSize
+                                                                .max,
+                                                            children: [
+                                                              AppBar(
+                                                                title: Text(
+                                                                  "Edit skills",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black),
+                                                                  textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                                ),
+                                                                actions: [
+                                                                  OutlineButton(
+                                                                    onPressed:
+                                                                        () {
+                                                                      print(
+                                                                          "save last state");
+                                                                    },
+                                                                    child: Text(
+                                                                        "Save"),
+                                                                    color: Colors
+                                                                        .white,
+                                                                    borderSide:
+                                                                    BorderSide
+                                                                        .none,
+                                                                  )
+                                                                ],
+                                                                backgroundColor:
+                                                                Colors
+                                                                    .white,
+                                                                iconTheme:
+                                                                IconThemeData(
+                                                                  color: Colors
+                                                                      .black, //change your color here
+                                                                ),
+                                                              ),
+                                                              Expanded(
+                                                                child: Column(
+                                                                  mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                                  children: [
+                                                                    Container(
+                                                                      decoration:
+                                                                      BoxDecoration(border: Border.all(width: 1, color: Colors.grey)),
+                                                                      child:
+                                                                      Column(
+                                                                        mainAxisAlignment:
+                                                                        MainAxisAlignment.center,
+                                                                        mainAxisSize:
+                                                                        MainAxisSize.min,
+                                                                        children: [
+                                                                          Padding(
+                                                                            padding: const EdgeInsets.only(top: 10.0, bottom: 10, left: 15, right: 15),
+                                                                            child: TextField(
+                                                                              textAlign: TextAlign.left,
+                                                                              scrollPadding: EdgeInsets.zero,
+                                                                              expands: false,
+                                                                              decoration: InputDecoration(isDense: true, contentPadding: EdgeInsets.all(0), border: OutlineInputBorder(borderSide: BorderSide(width: 3, color: Colors.red), borderRadius: BorderRadius.circular(5)), prefixIcon: Icon(Icons.search), hintText: "Search skills"),
+                                                                            ),
+                                                                          ),
+                                                                          RichText(
+                                                                            text: TextSpan(
+                                                                              text: "4",
+                                                                              style: TextStyle(color: Colors.blueAccent, fontSize: 18),
+                                                                              children: [
+                                                                                TextSpan(text: "/25\nSelected skills", style: TextStyle(color: Colors.grey.shade500, fontSize: 16))
+                                                                              ],
+                                                                            ),
+                                                                            textAlign: TextAlign.center,
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                    Expanded(
+                                                                      child:
+                                                                      Column(
+                                                                        mainAxisAlignment:
+                                                                        MainAxisAlignment.start,
+                                                                        crossAxisAlignment:
+                                                                        CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Padding(
+                                                                            padding: const EdgeInsets.all(8.0),
+                                                                            child: Text("My-Skills".toUpperCase(),style: TextStyle(color: Colors.grey.shade500),),
+                                                                          ),
+                                                                          Expanded(
+                                                                            child: ListView.separated (
+
+                                                                                itemCount: 30,
+                                                                                shrinkWrap: true,
+                                                                                separatorBuilder: (context,i)
+                                                                                {
+                                                                                  return Divider();
+                                                                                },
+                                                                                itemBuilder: (context, i) {
+                                                                                  return ListTile(
+                                                                                    trailing: RawMaterialButton(
+                                                                                      visualDensity: VisualDensity.compact,
+                                                                                      onPressed: () {},
+                                                                                      elevation: 2.0,
+                                                                                      fillColor: Colors.red,
+                                                                                      child: Icon(
+                                                                                        Icons.close,
+                                                                                      ),
+                                                                                      shape: CircleBorder(),
+                                                                                    ),
+                                                                                    leading: Text(
+                                                                                      "${_skills[0]}",
+                                                                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                                                                    ),
+                                                                                  );
+                                                                                }),
+                                                                          ),
+                                                                          Padding(
+                                                                            padding: const EdgeInsets.all(8.0),
+                                                                            child: Text("Skills".toUpperCase(),style: TextStyle(color: Colors.grey.shade500)),
+                                                                          ),
+                                                                          Expanded(
+                                                                            child: ListView.separated (
+                                                                                itemCount: 20,
+                                                                                shrinkWrap: true,
+                                                                                separatorBuilder: (context,i)=>Divider(),
+                                                                                itemBuilder: (context, i) {
+                                                                                  return ListTile(
+                                                                                    dense: true,
+                                                                                    trailing: RawMaterialButton(
+                                                                                      visualDensity: VisualDensity.compact,
+                                                                                      onPressed: () {},
+                                                                                      elevation: 2.0,
+                                                                                      fillColor: Colors.grey,
+                                                                                      child: Icon(
+                                                                                        Icons.add,
+                                                                                        color: Colors.white,
+                                                                                      ),
+                                                                                      shape: CircleBorder(),
+                                                                                    ),
+                                                                                    leading: Text(
+                                                                                      "${_skills[0]}",
+                                                                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                                                                    ),
+                                                                                  );
+                                                                                }),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                );
+                                              });
+                                        },
                                         color: Colors.blueGrey,
                                       )
                                       // Icon(Icons.rate_review,color: Colors.blueGrey[400],)
@@ -377,63 +740,114 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             Expanded(
-                                              child: ListView(
-                                                physics:
+                                              child: Column(
+                                                children: [
+                                                  ListView(
+                                                    physics:
                                                     NeverScrollableScrollPhysics(),
-                                                shrinkWrap: true,
-                                                children: List.generate(
-                                                  _skills.length,
-                                                  (index) => Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Container(
-                                                      padding: EdgeInsets.zero,
-                                                      decoration: BoxDecoration(
-                                                          border: Border.all(
-                                                              color: Colors
+                                                    shrinkWrap: true,
+                                                    children: List.generate(
+                                                      _skills.length,
+                                                          (index) => Padding(
+                                                        padding:
+                                                        const EdgeInsets
+                                                            .all(8.0),
+                                                        child: Container(
+                                                          padding:
+                                                          EdgeInsets.zero,
+                                                          decoration: BoxDecoration(
+                                                              border: Border.all(
+                                                                  color: Colors
                                                                       .blueGrey[
                                                                   100]),
-                                                          borderRadius:
+                                                              borderRadius:
                                                               BorderRadius
                                                                   .circular(
-                                                                      10)),
-                                                      child: Row(
-                                                        mainAxisAlignment:
+                                                                  10)),
+                                                          child: Row(
+                                                            mainAxisAlignment:
                                                             MainAxisAlignment
                                                                 .start,
-                                                        children: [
-                                                          Expanded(
-                                                            flex: 2,
-                                                            child: Container(
-                                                              decoration: BoxDecoration(
-                                                                  color: Colors
-                                                                      .green,
-                                                                  borderRadius: BorderRadius.only(
-                                                                      bottomLeft:
-                                                                          Radius.circular(
-                                                                              10),
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              10))),
-                                                              height: 40,
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            flex: 9,
-                                                            child: Container(
-                                                              padding:
+                                                            children: [
+                                                              Expanded(
+                                                                flex: 2,
+                                                                child:
+                                                                Container(
+                                                                  decoration: BoxDecoration(
+                                                                      color: Colors
+                                                                          .green,
+                                                                      borderRadius: BorderRadius.only(
+                                                                          bottomLeft:
+                                                                          Radius.circular(10),
+                                                                          topLeft: Radius.circular(10))),
+                                                                  height: 40,
+                                                                ),
+                                                              ),
+                                                              Expanded(
+                                                                flex: 9,
+                                                                child:
+                                                                Container(
+                                                                  padding:
                                                                   EdgeInsets
                                                                       .all(5),
-                                                              child: Text(
-                                                                  "${_skills[index]}"),
-                                                            ),
+                                                                  child: Text(
+                                                                      "${_skills[index]}"),
+                                                                ),
+                                                              ),
+                                                            ],
                                                           ),
-                                                        ],
+                                                        ),
                                                       ),
-                                                    ),
+                                                    ).toList().cast<Widget>(),
                                                   ),
-                                                ).toList().cast<Widget>(),
+                                                  Theme(
+                                                    data: Theme.of(context)
+                                                        .copyWith(
+                                                        dividerColor: Colors
+                                                            .transparent),
+                                                    child: ExpansionTile(
+                                                      trailing:
+                                                      Transform.rotate(
+                                                          angle:
+                                                          show_all_state
+                                                              ? 180 *
+                                                              pi /
+                                                              180
+                                                              : 180 *
+                                                              pi /
+                                                              90,
+                                                          child: Icon(
+                                                            Icons
+                                                                .arrow_drop_down_circle,
+                                                          )),
+                                                      initiallyExpanded:
+                                                      false,
+                                                      onExpansionChanged:
+                                                          (val) {
+                                                        setState(() {
+                                                          show_all_state =
+                                                              val;
+                                                          if (val == true) {
+                                                            _skills.add(
+                                                                "Vanilla javascript");
+                                                            _skills.add(
+                                                                "Node-js");
+                                                            return;
+                                                          }
+                                                          print(
+                                                              "remove here");
+                                                          _skills
+                                                              .removeLast();
+                                                          _skills
+                                                              .removeLast();
+                                                        });
+                                                      },
+                                                      title: show_all_state
+                                                          ? Text("Show Less")
+                                                          : Text("Show All"),
+                                                    ),
+                                                  )
+                                                ],
                                               ),
                                             )
                                           ],
@@ -445,32 +859,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               ),
                             ),
                           ),
-                          ExpansionTile(
-                            trailing: Transform.rotate(
-                                angle: show_all_state
-                                    ? 180 * pi / 180
-                                    : 180 * pi / 90,
-                                child: Icon(
-                                  Icons.arrow_drop_down_circle,
-                                )),
-                            initiallyExpanded: false,
-                            onExpansionChanged: (val) {
-                              setState(() {
-                                show_all_state = val;
-                                if (val == true) {
-                                  _skills.add("Vanilla javascript");
-                                  _skills.add("Node-js");
-                                  return;
-                                }
-                                print("remove here");
-                                _skills.removeLast();
-                                _skills.removeLast();
-                              });
-                            },
-                            title: show_all_state
-                                ? Text("Show Less")
-                                : Text("Show All"),
-                          )
+
                         ],
                       )
                     : ListView.separated(
