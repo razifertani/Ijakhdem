@@ -536,11 +536,6 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
     );
   }
 
-  // void showOverlay_regis(
-  //     BuildContext context, String headerMessage, String message) {
-  //   Navigator.of(context).push(AlertDialogueReg(headerMessage, message));
-  // }
-
   dispatchRegister(String fName, String lName, String email, String password) {
     BlocProvider.of<LoginBloc>(context).dispatch(
       SignupEvent(

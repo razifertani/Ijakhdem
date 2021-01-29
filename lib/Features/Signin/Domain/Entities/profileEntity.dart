@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Profile {
   GeneralInfo generalInfo;
   Parameters parameters;
@@ -33,15 +31,20 @@ class Profile {
 }
 
 class Parameters {
+  String idUser;
+  String idSession;
   String message;
   int current;
 
-  Parameters({this.message, this.current});
+  Parameters({
+    this.idUser,
+    this.idSession,
+    this.message,
+    this.current,
+  });
 }
 
 class GeneralInfo {
-  String idUser;
-  String idSession;
   String about;
   int active;
   String coverPicUrl;
@@ -56,9 +59,7 @@ class GeneralInfo {
   String zulipMail;
 
   GeneralInfo(
-      {this.idUser,
-      this.idSession,
-      this.about,
+      {this.about,
       this.active,
       this.coverPicUrl,
       this.email,
