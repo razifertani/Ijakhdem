@@ -38,7 +38,7 @@ android {
 
     defaultConfig {
         applicationId "com.application.ijakhdem"
-        minSdkVersion 21
+        minSdkVersion 16
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

@@ -23,8 +23,11 @@ dependencies:
   device_preview:
   sk_onboarding_screen: ^1.0.1
   titled_navigation_bar: ^4.1.0
-  
+  flutter_facebook_login: ^3.0.0
   cupertino_icons: ^1.0.0
+  google_sign_in: ^4.5.5
+  image_picker: ^0.6.7+22
+
 
 dev_dependencies:
   flutter_test:
