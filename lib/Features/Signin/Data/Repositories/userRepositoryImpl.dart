@@ -7,6 +7,7 @@ import 'package:Ijakhdem/Features/Signin/Domain/Entities/profileEntity.dart';
 import 'package:Ijakhdem/Features/Signin/Domain/Repositories/userRepository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 class UserRepositoryImpl implements UserRepository {
   final UserRemoteDataSource remoteDataSource;
@@ -54,12 +55,12 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, Profile>> loginFacebook(String test) async {
+  Future<Either<Failure, Profile>> loginFacebook(FacebookAccessToken token) async {
     try {
       if (await networkInfo.isConnected == false) {
         throw ServerExeption();
       }
-      response = await remoteDataSource.loginFacebook(test);
+      response = await remoteDataSource.loginFacebook(token);
       if (response is Profile) {
         return Right(response);
       } else {

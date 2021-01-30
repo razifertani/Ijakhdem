@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:Ijakhdem/Core/Utils/parameters.dart';
 import 'package:Ijakhdem/Features/Signin/Domain/Entities/profileEntity.dart';
 import 'package:Ijakhdem/Features/Signin/Domain/Usecases/forgotPassword.dart';
@@ -9,7 +10,8 @@ import 'package:Ijakhdem/Features/Signin/Domain/Usecases/register.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:http/http.dart' as http;
 part 'login_event.dart';
 part 'login_state.dart';
 
@@ -19,6 +21,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginFacebook loginFacebook;
   final Register register;
   final ForgotPassword forgotPassword;
+  ///facebook login a integrer
+  static final FacebookLogin facebookSignIn = new FacebookLogin();
 
   LoginBloc(
       {@required this.login,
@@ -75,7 +79,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     if (event is SigningFacebookEvent) {
       yield LoadingLoginState();
-      final failureOrToken = await loginFacebook('Test');
+      FacebookAccessToken facebookAccessToken= await loginFb();
+      final failureOrToken = await loginFacebook(facebookAccessToken);
       yield* failureOrToken.fold((failure) async* {
         yield ErrorLoginState(
           message: 'Server failure it will be up in a minute',
@@ -151,4 +156,55 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       yield GoToPrivacyPolicyState();
     }
   }
+}
+
+Future<FacebookAccessToken> loginFb() async {
+  final FacebookLoginResult result = await LoginBloc.facebookSignIn.logIn(['email']);
+
+  // print(result.);
+
+  switch (result.status) {
+    case FacebookLoginStatus.loggedIn:
+      final FacebookAccessToken accessToken = result.accessToken;
+      // print("access token ${accessToken.token}");
+      return accessToken;
+
+      loginMiddleWare(accessToken: accessToken);
+      break;
+    case FacebookLoginStatus.cancelledByUser:
+      // Get.snackbar('Canceled by User', 'Canceled by user');
+      break;
+    case FacebookLoginStatus.error:
+      // Get.snackbar(
+      //     'Error',
+      //     'Something went wrong with the login process.\n'
+      //         'Here\'s the error : ${result.errorMessage}');
+      break;
+  }
+}
+
+loginMiddleWare({FacebookAccessToken accessToken}) async {
+  // final token = result.accessToken.token;
+  ///calling graphFacebook to get data
+  final graphResponse = await http.get(
+      'https://graph.facebook.com/v8.0/me?fields=id,birthday,name,first_name,last_name,email,picture.width(640),location{location{country,city,longitude,latitude}}&access_token=${accessToken.token}');
+  print(json.decode(graphResponse.body)['birthday']);
+
+  ///appending data to currentUser
+  // print(graphResponse.body);
+  // this.currentUser.value =
+  // new User.fromJsonFb(json.decode(graphResponse.body));
+
+  ///appending token to user in case for future calls
+
+  // this.currentUser.value.social = "facebook";
+  //
+  // await apiRequest(
+  //     'http://192.168.1.4:3000/workers/create', this.currentUser.toJson())
+  //     .then((value) {
+  //   this.currentUser.value.authToken.value = json.decode(value)['token'];
+  //   print(value.toString());
+  // }).then((value) {
+  //   this.connectSocket();
+  // });
 }

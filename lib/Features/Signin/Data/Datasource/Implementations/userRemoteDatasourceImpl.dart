@@ -6,6 +6,7 @@ import 'package:Ijakhdem/Features/Signin/Data/Datasource/Implementations/socialM
 import 'package:Ijakhdem/Features/Signin/Data/Datasource/userRemoteDatasource.dart';
 import 'package:Ijakhdem/Features/Signin/Domain/Entities/profileEntity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
 import 'package:mercury_client/mercury_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -86,8 +87,8 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   }
 
   @override
-  Future<Profile> loginFacebook(String test) async {
-    Profile profile = await SocialMediaService().loginWithFB();
+  Future<Profile> loginFacebook(FacebookAccessToken token) async {
+    Profile profile = await SocialMediaService().loginWithFB(token);
     return profile;
   }
 
