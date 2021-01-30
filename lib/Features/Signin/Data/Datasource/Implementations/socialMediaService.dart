@@ -1,6 +1,9 @@
 // import 'dart:convert';
+import 'dart:convert';
+
 import 'package:Ijakhdem/Features/Signin/Domain/Entities/profileEntity.dart';
-// import 'package:http/http.dart' as http;
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:http/http.dart' as http;
 
 // import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
@@ -68,7 +71,20 @@ class SocialMediaService {
     // await googleSignIn.signOut();
   }
 
-  Future<Profile> loginWithFB() async {
+  Future<Profile> loginWithFB(FacebookAccessToken accessToken) async {
+    final graphResponse = await http.get(
+        'https://graph.facebook.com/v8.0/me?fields=id,birthday,name,first_name,last_name,email,picture.width(640),location{location{country,city,longitude,latitude}}&access_token=${accessToken.token}');
+    // print(json.decode(graphResponse.body)['birthday']);
+    GeneralInfo generalInfo = new GeneralInfo(
+        email: json.decode(graphResponse.body)['email'],
+        firstName: json.decode(graphResponse.body)['first_name'],
+        lastName: json.decode(graphResponse.body)['last_name'],
+        profilePicUrl: json.decode(graphResponse.body)['picture']['data']
+            ['url']);
+    Profile profile = new Profile(
+        generalInfo: generalInfo, parameters: Parameters(current: 0));
+    return profile;
+
     // final result = await facebookSignIn.logIn(['email']);
     // Profile profile = Profile();
     // if (result.status == FacebookLoginStatus.loggedIn) {
@@ -86,3 +102,28 @@ class SocialMediaService {
     //   throw ServerExeption();
   }
 }
+// loginMiddleWare({FacebookAccessToken accessToken}) async {
+//   // final token = result.accessToken.token;
+//   ///calling graphFacebook to get data
+//   final graphResponse = await http.get(
+//       'https://graph.facebook.com/v8.0/me?fields=id,birthday,name,first_name,last_name,email,picture.width(640),location{location{country,city,longitude,latitude}}&access_token=${accessToken.token}');
+//   print(json.decode(graphResponse.body)['birthday']);
+//
+//   ///appending data to currentUser
+//   // print(graphResponse.body);
+//   // this.currentUser.value =
+//   // new User.fromJsonFb(json.decode(graphResponse.body));
+//
+//   ///appending token to user in case for future calls
+//
+//   // this.currentUser.value.social = "facebook";
+//   //
+//   // await apiRequest(
+//   //     'http://192.168.1.4:3000/workers/create', this.currentUser.toJson())
+//   //     .then((value) {
+//   //   this.currentUser.value.authToken.value = json.decode(value)['token'];
+//   //   print(value.toString());
+//   // }).then((value) {
+//   //   this.connectSocket();
+//   // });
+// }
