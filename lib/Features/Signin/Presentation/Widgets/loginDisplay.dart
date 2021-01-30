@@ -362,7 +362,7 @@ class _LoginDisplayState extends State<LoginDisplay> {
   }
 
   dispatchLoginGoogle() {
-    // BlocProvider.of<LoginBloc>(context).dispatch(SigningGoogleEvent());
+    BlocProvider.of<LoginBloc>(context).dispatch(SigningGoogleEvent());
   }
 
   dispatchLoginFacebook() {

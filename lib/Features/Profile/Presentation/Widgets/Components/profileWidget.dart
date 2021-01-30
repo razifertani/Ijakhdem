@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:Ijakhdem/Core/Utils/appColors.dart';
 import 'package:Ijakhdem/Features/Profile/Presentation/bloc/profile_bloc.dart';
 import 'package:Ijakhdem/Features/Signin/Domain/Entities/profileEntity.dart';
@@ -5,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 // import 'package:flutter_chat_bubble/bubble_type.dart';
 // import 'package:flutter_chat_bubble/chat_bubble.dart';
 // import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_1.dart';
@@ -20,12 +23,28 @@ class ProfileWidget extends StatefulWidget {
 }
 
 class _ProfileWidgetState extends State<ProfileWidget> {
+
+  File _image;
+  final picker = ImagePicker();
+
+  Future getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
   int _select = 0;
   static const double pi = 3.1415926535897932;
 
   List<String> _skills = ['Android', 'Flutter', 'React-Js'];
 
   bool show_all_state = false;
+
   GlobalKey scaffold_key = new GlobalKey();
 
   TextEditingController summaryController = new TextEditingController();
@@ -67,7 +86,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       children: [
                         CircleAvatar(
                           radius: 50,
-                          backgroundImage: Image.network(
+                          backgroundImage:_image ??  Image.network(
                             profile.generalInfo.profilePicUrl ??
                                 'https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png',
                             width: 200,
@@ -75,9 +94,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           ).image,
                         ),
                         GestureDetector(
-                          onTap: () {
-                            print("change image");
-                          },
+                          onTap: getImage,
                           child: Container(
                             padding: EdgeInsets.all(3),
                             decoration: BoxDecoration(

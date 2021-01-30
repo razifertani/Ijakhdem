@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:Ijakhdem/Features/Signin/Domain/Entities/profileEntity.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 
 // import 'package:firebase_auth/firebase_auth.dart';
@@ -15,7 +16,53 @@ class SocialMediaService {
   // final FacebookLogin facebookSignIn = FacebookLogin();
 
   Future<Profile> signInWithGoogle() async {
-    try {
+    GoogleSignIn _googleSignIn = GoogleSignIn(
+      scopes: <String>[
+        'email',
+        'https://www.googleapis.com/auth/userinfo.profile'
+      ],
+    );
+
+
+      // this.currentUser.value = User.fr
+      // print(_googleSignIn.currentUser.);
+      ///appending data to currentUser
+      // print(graphResponse.body);
+
+      try {
+        await _googleSignIn.signOut();
+        final GoogleSignInAccount googleSignInAccount =
+        await _googleSignIn.signIn();
+        final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount.authentication;
+
+        print(googleSignInAuthentication.accessToken); // New refreshed token
+        // print(_googleSignIn.currentUser.email);
+        // print(_googleSignIn.currentUser.photoUrl);
+        // print(_googleSignIn.currentUser.displayName);
+        var response_google = await http.get(
+            'https://www.googleapis.com/oauth2/v1/userinfo?alt=json',
+            headers: {
+              'Authorization': 'Bearer ' + googleSignInAuthentication.accessToken
+            });
+        GeneralInfo generalInfo = new GeneralInfo(
+            email: json.decode(response_google.body)['email'],
+            firstName: json.decode(response_google.body)['given_name'] ?? 'none',
+            lastName: json.decode(response_google.body)['family_name'] ?? 'none',
+            profilePicUrl: json.decode(response_google.body)['picture']
+          );
+        Profile profile = new Profile(
+            generalInfo: generalInfo, parameters: Parameters(current: 0));
+        return profile;
+    //     json["given_name"] ?? '',
+    // json["family_name"] ?? '',
+    // json["email"],
+    // null,
+    // null,
+    // json["picture"],
+    // 'not specefied',
+    // id: json["id"],
+    // dob: json["birthday"],
       // GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
       // GoogleSignInAuthentication googleSignInAuthentication =
       //     await googleSignInAccount.authentication;
