@@ -110,6 +110,14 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<Profile> loginFacebook(FacebookAccessToken token) async {
+    if(token==null)
+   {
+
+     print("token is null");
+
+    return null;
+   }
+
     Profile profile = await SocialMediaService().loginWithFB(token);
     return profile;
   }
