@@ -55,7 +55,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, Profile>> loginFacebook(FacebookAccessToken token) async {
+  Future<Either<Failure, Profile>> loginFacebook(String token) async {
     try {
       if (await networkInfo.isConnected == false) {
         throw ServerExeption();

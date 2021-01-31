@@ -35,12 +35,16 @@ class Parameters {
   String idSession;
   String message;
   int current;
+  String connexionType;
+  String facebookToken;
 
   Parameters({
     this.idUser,
     this.idSession,
     this.message,
     this.current,
+    this.connexionType,
+    this.facebookToken,
   });
 }
 

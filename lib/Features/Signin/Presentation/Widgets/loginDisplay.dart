@@ -366,7 +366,10 @@ class _LoginDisplayState extends State<LoginDisplay> {
   }
 
   dispatchLoginFacebook() {
-    BlocProvider.of<LoginBloc>(context).dispatch(SigningFacebookEvent());
+    BlocProvider.of<LoginBloc>(context).dispatch(SigningFacebookEvent(
+      token: '',
+      isConnected: false,
+    ));
   }
 
   dispatchGoToSignup() {

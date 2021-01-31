@@ -1,10 +1,12 @@
 // import 'dart:convert';
 import 'dart:convert';
 
+import 'package:Ijakhdem/Core/Error/exceptions.dart';
 import 'package:Ijakhdem/Features/Signin/Domain/Entities/profileEntity.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 // import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
@@ -13,7 +15,7 @@ class SocialMediaService {
   // final FirebaseAuth auth = FirebaseAuth.instance;
   // final GoogleSignIn googleSignIn = GoogleSignIn();
   // FirebaseUser firebaseUser;
-  // final FacebookLogin facebookSignIn = FacebookLogin();
+  final FacebookLogin facebookSignIn = FacebookLogin();
 
   Future<Profile> signInWithGoogle() async {
     GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -23,46 +25,44 @@ class SocialMediaService {
       ],
     );
 
+    // this.currentUser.value = User.fr
+    // print(_googleSignIn.currentUser.);
+    ///appending data to currentUser
+    // print(graphResponse.body);
 
-      // this.currentUser.value = User.fr
-      // print(_googleSignIn.currentUser.);
-      ///appending data to currentUser
-      // print(graphResponse.body);
+    try {
+      await _googleSignIn.signOut();
+      final GoogleSignInAccount googleSignInAccount =
+          await _googleSignIn.signIn();
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
 
-      try {
-        await _googleSignIn.signOut();
-        final GoogleSignInAccount googleSignInAccount =
-        await _googleSignIn.signIn();
-        final GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount.authentication;
-
-        print(googleSignInAuthentication.accessToken); // New refreshed token
-        // print(_googleSignIn.currentUser.email);
-        // print(_googleSignIn.currentUser.photoUrl);
-        // print(_googleSignIn.currentUser.displayName);
-        var response_google = await http.get(
-            'https://www.googleapis.com/oauth2/v1/userinfo?alt=json',
-            headers: {
-              'Authorization': 'Bearer ' + googleSignInAuthentication.accessToken
-            });
-        GeneralInfo generalInfo = new GeneralInfo(
-            email: json.decode(response_google.body)['email'],
-            firstName: json.decode(response_google.body)['given_name'] ?? 'none',
-            lastName: json.decode(response_google.body)['family_name'] ?? 'none',
-            profilePicUrl: json.decode(response_google.body)['picture']
-          );
-        Profile profile = new Profile(
-            generalInfo: generalInfo, parameters: Parameters(current: 0));
-        return profile;
-    //     json["given_name"] ?? '',
-    // json["family_name"] ?? '',
-    // json["email"],
-    // null,
-    // null,
-    // json["picture"],
-    // 'not specefied',
-    // id: json["id"],
-    // dob: json["birthday"],
+      print(googleSignInAuthentication.accessToken); // New refreshed token
+      // print(_googleSignIn.currentUser.email);
+      // print(_googleSignIn.currentUser.photoUrl);
+      // print(_googleSignIn.currentUser.displayName);
+      var response_google = await http.get(
+          'https://www.googleapis.com/oauth2/v1/userinfo?alt=json',
+          headers: {
+            'Authorization': 'Bearer ' + googleSignInAuthentication.accessToken
+          });
+      GeneralInfo generalInfo = new GeneralInfo(
+          email: json.decode(response_google.body)['email'],
+          firstName: json.decode(response_google.body)['given_name'] ?? 'none',
+          lastName: json.decode(response_google.body)['family_name'] ?? 'none',
+          profilePicUrl: json.decode(response_google.body)['picture']);
+      Profile profile = new Profile(
+          generalInfo: generalInfo, parameters: Parameters(current: 0));
+      return profile;
+      //     json["given_name"] ?? '',
+      // json["family_name"] ?? '',
+      // json["email"],
+      // null,
+      // null,
+      // json["picture"],
+      // 'not specefied',
+      // id: json["id"],
+      // dob: json["birthday"],
       // GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
       // GoogleSignInAuthentication googleSignInAuthentication =
       //     await googleSignInAccount.authentication;
@@ -118,59 +118,48 @@ class SocialMediaService {
     // await googleSignIn.signOut();
   }
 
-  Future<Profile> loginWithFB(FacebookAccessToken accessToken) async {
-    final graphResponse = await http.get(
-        'https://graph.facebook.com/v8.0/me?fields=id,birthday,name,first_name,last_name,email,picture.width(640),location{location{country,city,longitude,latitude}}&access_token=${accessToken.token}');
-    // print(json.decode(graphResponse.body)['birthday']);
-    GeneralInfo generalInfo = new GeneralInfo(
-        email: json.decode(graphResponse.body)['email'],
-        firstName: json.decode(graphResponse.body)['first_name'],
-        lastName: json.decode(graphResponse.body)['last_name'],
-        profilePicUrl: json.decode(graphResponse.body)['picture']['data']
-            ['url']);
-    Profile profile = new Profile(
-        generalInfo: generalInfo, parameters: Parameters(current: 0));
-    return profile;
+  Future<Profile> loginWithFB(String token) async {
+    if (token == '') {
+      final FacebookLoginResult result = await facebookSignIn.logIn(['email']);
 
-    // final result = await facebookSignIn.logIn(['email']);
-    // Profile profile = Profile();
-    // if (result.status == FacebookLoginStatus.loggedIn) {
-    //   final token = result.accessToken.token;
-    //   final response = await http.get(
-    //       'https://graph.facebook.com/v2.12/me?fields=name,picture,email&access_token=$token');
+      switch (result.status) {
+        case FacebookLoginStatus.loggedIn:
+          final FacebookAccessToken accessToken = result.accessToken;
+          token = accessToken.token;
+          break;
+        case FacebookLoginStatus.cancelledByUser:
+          throw ErrorLoggingInException();
+          break;
+        case FacebookLoginStatus.error:
+          throw ServerExeption();
+          break;
+      }
+    } else {
+      final graphResponse = await http.get(
+        'https://graph.facebook.com/v8.0/me?fields=id,birthday,name,first_name,last_name,email,picture.width(640),location{location{country,city,longitude,latitude}}&access_token=$token',
+      );
 
-    //   profile.userGeneralInfo.firstName = json.decode(response.body)['name'];
-    //   profile.userGeneralInfo.lastName = '';
-    //   profile.userGeneralInfo.mail = json.decode(response.body)['email'];
-    //   profile.userGeneralInfo.type = 'Facebook';
+      Profile profile = Profile(
+        generalInfo: GeneralInfo(
+          // print(json.decode(graphResponse.body)['birthday']);
+          email: json.decode(graphResponse.body)['email'],
+          firstName: json.decode(graphResponse.body)['first_name'],
+          lastName: json.decode(graphResponse.body)['last_name'],
+          profilePicUrl: json.decode(graphResponse.body)['picture']['data']
+              ['url'],
+        ),
+        parameters: Parameters(
+          current: 0,
+          connexionType: 'Facebook',
+        ),
+      );
 
-    // return profile;
-    // } else {
-    //   throw ServerExeption();
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setBool("stayConnected", true);
+      prefs.setBool("facebook", true);
+      prefs.setString("token", token);
+
+      return profile;
+    }
   }
 }
-// loginMiddleWare({FacebookAccessToken accessToken}) async {
-//   // final token = result.accessToken.token;
-//   ///calling graphFacebook to get data
-//   final graphResponse = await http.get(
-//       'https://graph.facebook.com/v8.0/me?fields=id,birthday,name,first_name,last_name,email,picture.width(640),location{location{country,city,longitude,latitude}}&access_token=${accessToken.token}');
-//   print(json.decode(graphResponse.body)['birthday']);
-//
-//   ///appending data to currentUser
-//   // print(graphResponse.body);
-//   // this.currentUser.value =
-//   // new User.fromJsonFb(json.decode(graphResponse.body));
-//
-//   ///appending token to user in case for future calls
-//
-//   // this.currentUser.value.social = "facebook";
-//   //
-//   // await apiRequest(
-//   //     'http://192.168.1.4:3000/workers/create', this.currentUser.toJson())
-//   //     .then((value) {
-//   //   this.currentUser.value.authToken.value = json.decode(value)['token'];
-//   //   print(value.toString());
-//   // }).then((value) {
-//   //   this.connectSocket();
-//   // });
-// }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:Ijakhdem/Core/Error/exceptions.dart';
 import 'package:Ijakhdem/Core/Utils/parameters.dart';
 import 'package:Ijakhdem/Features/Profile/Data/Datasource/profileRemoteDatasource.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
 import 'package:Ijakhdem/Features/Signin/Domain/Entities/profileEntity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,6 +12,8 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   final http.Client client;
 
   ProfileRemoteDataSourceImpl({@required this.client});
+
+  final FacebookLogin facebookSignIn = FacebookLogin();
 
   @override
   Future<Profile> editProfile(Profile profile) async {
@@ -27,11 +30,11 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
     );
 
     if (response.statusCode == 202) {
-      final message = json.decode(response.body)['message'];
+      // final message = json.decode(response.body)['message'];
 
       return profile;
     } else if (response.statusCode != 202) {
-      final message = 'An error occured';
+      // final message = 'An error occured';
       return profile;
     } else {
       throw ServerExeption();
@@ -70,26 +73,36 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
     final String idUser = profile.parameters.idUser;
     final String idSession = profile.parameters.idSession;
 
-    final response = await http.get(
-      "http://92.222.181.118/logout?id_user=$idUser",
-      headers: {
-        'Content-Type': 'application/json',
-        'idSession': idSession,
-      },
-    );
-
-    if (response.statusCode == 202) {
-      final message = json.decode(response.body)['message'];
+    if (profile.parameters.connexionType == 'Facebook') {
+      await facebookSignIn.logOut();
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setBool("stayConnected", false);
 
-      return message;
-    } else if (response.statusCode != 200) {
-      final message = 'An error occured';
+      final message = 'Succefully Logout';
       return message;
     } else {
-      throw ServerExeption();
+      final response = await http.get(
+        "http://92.222.181.118/logout?id_user=$idUser",
+        headers: {
+          'Content-Type': 'application/json',
+          'idSession': idSession,
+        },
+      );
+
+      if (response.statusCode == 202) {
+        final message = json.decode(response.body)['message'];
+
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setBool("stayConnected", false);
+
+        return message;
+      } else if (response.statusCode != 200) {
+        final message = 'An error occured';
+        return message;
+      } else {
+        throw ServerExeption();
+      }
     }
   }
 }

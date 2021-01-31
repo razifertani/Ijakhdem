@@ -18,7 +18,13 @@ class SigninEvent extends LoginEvent {
 
 class SigningGoogleEvent extends LoginEvent {}
 
-class SigningFacebookEvent extends LoginEvent {}
+class SigningFacebookEvent extends LoginEvent {
+  final String token;
+  final bool isConnected;
+
+  SigningFacebookEvent({@required this.token, @required this.isConnected})
+      : super([token, isConnected]);
+}
 
 class ProfileShowEvent extends LoginEvent {
   final String idUser;

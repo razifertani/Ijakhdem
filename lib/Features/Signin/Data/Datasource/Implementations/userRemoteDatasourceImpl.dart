@@ -73,7 +73,6 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setBool("stayConnected", true);
-        // prefs.setBool("stayConnected", false);
         prefs.setString("email", loginParams.email);
         prefs.setString("password", loginParams.password);
 
@@ -109,15 +108,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   }
 
   @override
-  Future<Profile> loginFacebook(FacebookAccessToken token) async {
-    if(token==null)
-   {
-
-     print("token is null");
-
-    return null;
-   }
-
+  Future<Profile> loginFacebook(String token) async {
     Profile profile = await SocialMediaService().loginWithFB(token);
     return profile;
   }

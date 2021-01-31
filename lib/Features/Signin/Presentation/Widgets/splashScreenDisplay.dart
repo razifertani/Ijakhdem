@@ -29,13 +29,22 @@ class _SplashScreenDisplayState extends State<SplashScreenDisplay> {
   stayLoggedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getBool("stayConnected") == true) {
-      BlocProvider.of<LoginBloc>(context).dispatch(
-        SigninEvent(
-          email: prefs.getString("email"),
-          password: prefs.getString("password"),
-          isConnected: true,
-        ),
-      );
+      if (prefs.getBool("facebook") == true) {
+        BlocProvider.of<LoginBloc>(context).dispatch(
+          SigningFacebookEvent(
+            token: prefs.getString("token"),
+            isConnected: true,
+          ),
+        );
+      } else {
+        BlocProvider.of<LoginBloc>(context).dispatch(
+          SigninEvent(
+            email: prefs.getString("email"),
+            password: prefs.getString("password"),
+            isConnected: true,
+          ),
+        );
+      }
     } else {
       Timer(Duration(milliseconds: 1000), () {
         BlocProvider.of<LoginBloc>(context).dispatch(GoToOnBoardingEvent());

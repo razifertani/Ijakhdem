@@ -374,7 +374,9 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      dispatchLoginFacebook();
+                    },
                     child: Row(
                       children: [
                         Image.asset(
@@ -549,6 +551,13 @@ class _RegisterDisplayState extends State<RegisterDisplay> {
 
   dispatchGoToLogin() {
     BlocProvider.of<LoginBloc>(context).dispatch(GoToSigninEvent());
+  }
+
+  dispatchLoginFacebook() {
+    BlocProvider.of<LoginBloc>(context).dispatch(SigningFacebookEvent(
+      token: '',
+      isConnected: false,
+    ));
   }
 
   dispatchGoToTermsOfUse() {
