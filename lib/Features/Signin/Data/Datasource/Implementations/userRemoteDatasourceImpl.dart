@@ -49,6 +49,28 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         // profile.generalInfo.type = 'Email';
         // d67d8ab4f4c10bf22aa353e27879133c
 
+        final getAllParamsResponse = await http.get(
+          "http://92.222.181.118/get_all_parameter?id_user=$idUser",
+          headers: {
+            'Content-Type': 'application/json',
+            'idSession': idSession,
+          },
+        );
+        // if (getAllParamsResponse.statusCode == 200) {
+        //   Map<String, dynamic> allParamsMap =
+        //       json.decode(getAllParamsResponse.body);
+        //   allParamsMap['categoie_question_answer'].forEach((key, value) {
+        //     print(key);
+        //     value.forEach((key, value) {
+        //       print(key);
+        //       value.forEach((element) {
+        //         print(element[0]['answer']);
+        //       });
+        //     });
+        //   });
+        //   allParamsMap['skills'].forEach((key, value) {});
+        // }
+
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setBool("stayConnected", true);
         // prefs.setBool("stayConnected", false);
