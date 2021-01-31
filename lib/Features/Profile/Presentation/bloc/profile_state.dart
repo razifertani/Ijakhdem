@@ -129,3 +129,11 @@ class GoToPrivacyPoliceyState extends ProfileState {
     @required this.profile,
   }) : super([profile]);
 }
+
+class EditProfileState extends ProfileState {
+  final Profile profile;
+
+  EditProfileState({
+    @required this.profile,
+  }) : super([profile]);
+}

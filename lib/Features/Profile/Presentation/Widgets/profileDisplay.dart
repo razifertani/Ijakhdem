@@ -24,19 +24,15 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      // onPressed: () => Scaffold.of(context).openDrawer(),
-      // appBar: AppBar(
-      //   title: Text('Browse'),
-      //   centerTitle: true,
-      //   elevation: 10,
-      // ),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60),
         child: SafeArea(
           child: ListTile(
             leading: CircleAvatar(
-              backgroundImage: Image.asset('Assets/Images/1.jpg').image,
-              backgroundColor: Colors.black,
+              backgroundImage: Image.network(
+                profile.generalInfo.profilePicUrl ??
+                    'https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png',
+              ).image,
             ),
             title: Text(
               profile.generalInfo.firstName +
@@ -53,7 +49,6 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
           ),
         ),
       ),
-
       body: Container(
         child: ListView(
           children: [
@@ -69,11 +64,11 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
                         dispatchGoToBalanceWidget(profile);
                       },
                       title: Container(
-                        height: 100.0,
+                        height: screenHeight * 0.13,
                         color: Colors.transparent,
                         child: Container(
                             decoration: BoxDecoration(
-                                color: AppColors.lightBlueChatColor,
+                                color: AppColors.primaryColor,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10.0))),
                             child: Column(
@@ -331,7 +326,7 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
             ),
             Divider(),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.symmetric(vertical: 15.0),
               child: Center(
                 child: GestureDetector(
                   onTap: () {

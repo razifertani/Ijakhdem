@@ -21,9 +21,6 @@ class _BalanceWidgetState extends State<BalanceWidget> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blueAccent,
-          shadowColor: Colors.blueAccent,
-          elevation: 0,
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
@@ -33,10 +30,11 @@ class _BalanceWidgetState extends State<BalanceWidget> {
               dispatchGoToProfileDisplay(profile);
             },
           ),
+          elevation: 0,
         ),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: AppColors.primaryColor,
         body: Container(
-          color: Colors.blueAccent,
+          color: AppColors.primaryColor,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

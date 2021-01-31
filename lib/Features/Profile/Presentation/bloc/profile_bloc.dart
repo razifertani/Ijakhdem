@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:Ijakhdem/Features/Profile/Domain/Usecases/editProfile.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -12,11 +13,12 @@ part 'profile_state.dart';
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final ResetPassword resetPassword;
   final Logout logout;
+  final EditProfile editProfile;
 
-  ProfileBloc({
-    @required this.resetPassword,
-    @required this.logout,
-  });
+  ProfileBloc(
+      {@required this.resetPassword,
+      @required this.logout,
+      @required this.editProfile});
 
   @override
   ProfileState get initialState => EmptyProfileState();
@@ -107,6 +109,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       yield GoToPrivacyPoliceyState(
         profile: event.profile,
       );
+    }
+
+    if (event is EditProfileEvent) {
+      // yield LoadingProfileState();
+      final failureOrToken = await editProfile(event.profile);
+      // yield* failureOrToken.fold((failure) async* {
+      //   yield ErrorProfileState(
+      //     profile: event.profile,
+      //   );
+      // }, (profile) async* {
+      //   yield GoToSigninState();
+      // });
     }
 
     if (event is LogoutEvent) {

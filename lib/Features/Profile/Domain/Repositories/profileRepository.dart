@@ -6,5 +6,6 @@ import 'package:Ijakhdem/Features/Signin/Domain/Entities/profileEntity.dart';
 abstract class ProfileRepository {
   Future<Either<Failure, Profile>> resetPassword(
       ResetPasswordParams resetPasswordParams);
+  Future<Either<Failure, Profile>> editProfile(Profile profile);
   Future<Either<Failure, String>> logout(Profile profile);
 }

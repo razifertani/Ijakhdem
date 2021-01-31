@@ -115,3 +115,11 @@ class GoToPrivacyPoliceyEvent extends ProfileEvent {
     @required this.profile,
   }) : super([profile]);
 }
+
+class EditProfileEvent extends ProfileEvent {
+  final Profile profile;
+
+  EditProfileEvent({
+    @required this.profile,
+  }) : super([profile]);
+}

@@ -3,6 +3,7 @@ import 'package:Ijakhdem/Features/Profile/Data/Datasource/profileRemoteDatasourc
 import 'package:Ijakhdem/Features/Profile/Data/Datasource/Implementations/profileRemoteDatasourceImpl.dart';
 import 'package:Ijakhdem/Features/Profile/Data/Repositories/profileRepositoryImpl.dart';
 import 'package:Ijakhdem/Features/Profile/Domain/Repositories/profileRepository.dart';
+import 'package:Ijakhdem/Features/Profile/Domain/Usecases/editProfile.dart';
 import 'package:Ijakhdem/Features/Profile/Domain/Usecases/logout.dart';
 import 'package:Ijakhdem/Features/Profile/Domain/Usecases/resetPassword.dart';
 import 'package:Ijakhdem/Features/Home/Presentation/bloc/home_bloc.dart';
@@ -130,11 +131,13 @@ void init() {
 
   // ? Bloc
   sl.registerFactory(() => ProfileBloc(
+        editProfile: sl(),
         resetPassword: sl(),
         logout: sl(),
       ));
 
   // ? Use cases
+  sl.registerLazySingleton(() => EditProfile(sl()));
   sl.registerLazySingleton(() => Logout(sl()));
   sl.registerLazySingleton(() => ResetPassword(sl()));
 

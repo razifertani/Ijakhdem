@@ -13,6 +13,32 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   ProfileRemoteDataSourceImpl({@required this.client});
 
   @override
+  Future<Profile> editProfile(Profile profile) async {
+    final String idUser = profile.parameters.idUser;
+    final String idSession = profile.parameters.idSession;
+
+    final response = await http.post(
+      "http://92.222.181.118/update_profile?id_user=$idUser",
+      headers: {
+        'Content-Type': 'application/json',
+        'idSession': idSession,
+      },
+      body: json.encode(profile.toJson()),
+    );
+
+    if (response.statusCode == 202) {
+      final message = json.decode(response.body)['message'];
+
+      return profile;
+    } else if (response.statusCode != 202) {
+      final message = 'An error occured';
+      return profile;
+    } else {
+      throw ServerExeption();
+    }
+  }
+
+  @override
   Future<Profile> resetPassword(ResetPasswordParams resetPasswordParams) async {
     // Profile profile = resetPasswordParams.profile;
     // String idUser = resetPasswordParams.profile.userGeneralInfo.idUser;

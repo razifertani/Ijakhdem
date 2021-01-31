@@ -47,7 +47,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
           current: 0,
         );
         // profile.generalInfo.type = 'Email';
-        print(profile.parameters.idUser);
+        // d67d8ab4f4c10bf22aa353e27879133c
 
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setBool("stayConnected", true);

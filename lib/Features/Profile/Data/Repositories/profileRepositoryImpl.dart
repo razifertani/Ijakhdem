@@ -20,6 +20,23 @@ class ProfileRepositoryImpl implements ProfileRepository {
   });
 
   @override
+  Future<Either<Failure, Profile>> editProfile(Profile profile) async {
+    try {
+      if (await networkInfo.isConnected == false) {
+        throw ServerExeption();
+      }
+      response = await remoteDataSource.editProfile(profile);
+      if (response is Profile) {
+        return Right(response);
+      } else {
+        return Left(response);
+      }
+    } on ServerExeption {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
   Future<Either<Failure, Profile>> resetPassword(
       ResetPasswordParams resetPasswordParams) async {
     try {

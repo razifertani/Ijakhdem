@@ -23,7 +23,6 @@ class ProfileWidget extends StatefulWidget {
 }
 
 class _ProfileWidgetState extends State<ProfileWidget> {
-
   File _image;
   final picker = ImagePicker();
 
@@ -38,6 +37,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
       }
     });
   }
+
   int _select = 0;
   static const double pi = 3.1415926535897932;
 
@@ -52,6 +52,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   @override
   Widget build(BuildContext context) {
     Profile profile = widget.profile;
+
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       key: scaffold_key,
@@ -71,8 +74,17 @@ class _ProfileWidgetState extends State<ProfileWidget> {
       body: Column(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height / 2.3,
+            height: screenHeight * 0.35,
             color: Colors.blueAccent[100],
+            // decoration: BoxDecoration(
+            //   image: DecorationImage(
+            //     image: Image.network(
+            //       profile.generalInfo.coverPicUrl ??
+            //           'https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png',
+            //       fit: BoxFit.fitHeight,
+            //     ).image,
+            //   ),
+            // ),
             child: Stack(
               alignment: Alignment.center,
               fit: StackFit.passthrough,
@@ -86,12 +98,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       children: [
                         CircleAvatar(
                           radius: 50,
-                          backgroundImage:_image ??  Image.network(
-                            profile.generalInfo.profilePicUrl ??
-                                'https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png',
-                            width: 200,
-                            height: 200,
-                          ).image,
+                          backgroundImage: _image ??
+                              Image.network(
+                                profile.generalInfo.profilePicUrl ??
+                                    'https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png',
+                              ).image,
                         ),
                         GestureDetector(
                           onTap: getImage,
@@ -242,8 +253,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                           setState(() {
                                             showModalBottomSheet(
                                                 isScrollControlled: true,
-                                                context:
-                                                    scaffold_key.currentContext,
+                                                context: context,
                                                 builder: (context) {
                                                   return Padding(
                                                     padding: EdgeInsets.only(
@@ -253,6 +263,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                             .top),
                                                     child: Container(
                                                       width: double.infinity,
+                                                      height:
+                                                          screenHeight * 0.8,
                                                       color: Colors.white,
                                                       child: Column(
                                                         mainAxisAlignment:
@@ -271,11 +283,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                             ),
                                                             backgroundColor:
                                                                 Colors.white,
-                                                            iconTheme:
-                                                                IconThemeData(
-                                                              color: Colors
-                                                                  .black, //change your color here
-                                                            ),
+                                                            automaticallyImplyLeading:
+                                                                false,
                                                           ),
                                                           Expanded(
                                                             child: Container(
@@ -316,17 +325,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                                                 const EdgeInsets.only(top: 8.0),
                                                                             child:
                                                                                 TextField(
-                                                                                  decoration: InputDecoration(border: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey.shade500))),
-
-                                                                                  maxLength: 4000,
-                                                                                  controller: summaryController,
-                                                                                  textInputAction: TextInputAction.done,
-                                                                                  minLines: 5,
-                                                                                  maxLines: null,
-
-                                                                                  // decoration: InputDecoration(border: InputBorder.none),
-                                                                                  // enabled: summaryState,
-                                                                                ),
+                                                                              decoration: InputDecoration(border: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey.shade500))),
+                                                                              maxLength: 4000,
+                                                                              controller: summaryController,
+                                                                              textInputAction: TextInputAction.done,
+                                                                              minLines: 5,
+                                                                              maxLines: null,
+                                                                            ),
                                                                           ),
                                                                         ]),
                                                                   ),
@@ -351,8 +356,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                                                 Colors.blueAccent,
                                                                             highlightColor:
                                                                                 Colors.white,
-                                                                            onPressed: () =>
-                                                                                print("test"),
+                                                                            onPressed:
+                                                                                () {
+                                                                              setState(() {
+                                                                                profile.generalInfo.about = summaryController.text.trim();
+                                                                              });
+                                                                              dispatchEditProfile(profile);
+                                                                            },
                                                                             child:
                                                                                 Padding(
                                                                               padding: const EdgeInsets.only(right: 50.0, left: 50.0),
@@ -481,47 +491,47 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                         ),
                                       ),
                                       /*
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 8.0),
-                                        child: Container(
-                                          height: 120,
-                                          child: ListView.builder(
-                                            shrinkWrap: true,
-                                            scrollDirection: Axis.horizontal,
-                                            itemCount: 2,
-                                            itemBuilder: (BuildContext context,
-                                                int index) {
-                                              return Container(
-                                                height: 50,
-                                                child: Card(
-                                                  elevation: 5,
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: [
-                                                      Expanded(
-                                                        child: CircleAvatar(
-                                                          backgroundColor:
-                                                              Colors.white,
-                                                          radius: 50,
-                                                          backgroundImage:
-                                                              Image.asset(
-                                                                      'Assets/Images/js.png')
-                                                                  .image,
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                          "Javascript Project"),
-                                                    ],
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                      */
+                                                                                                                        Padding(
+                                                                                                                          padding:
+                                                                                                                              const EdgeInsets.only(top: 8.0),
+                                                                                                                          child: Container(
+                                                                                                                            height: 120,
+                                                                                                                            child: ListView.builder(
+                                                                                                                              shrinkWrap: true,
+                                                                                                                              scrollDirection: Axis.horizontal,
+                                                                                                                              itemCount: 2,
+                                                                                                                              itemBuilder: (BuildContext context,
+                                                                                                                                  int index) {
+                                                                                                                                return Container(
+                                                                                                                                  height: 50,
+                                                                                                                                  child: Card(
+                                                                                                                                    elevation: 5,
+                                                                                                                                    child: Column(
+                                                                                                                                      mainAxisSize:
+                                                                                                                                          MainAxisSize.min,
+                                                                                                                                      children: [
+                                                                                                                                        Expanded(
+                                                                                                                                          child: CircleAvatar(
+                                                                                                                                            backgroundColor:
+                                                                                                                                                Colors.white,
+                                                                                                                                            radius: 50,
+                                                                                                                                            backgroundImage:
+                                                                                                                                                Image.asset(
+                                                                                                                                                        'Assets/Images/js.png')
+                                                                                                                                                    .image,
+                                                                                                                                          ),
+                                                                                                                                        ),
+                                                                                                                                        Text(
+                                                                                                                                            "Javascript Project"),
+                                                                                                                                      ],
+                                                                                                                                    ),
+                                                                                                                                  ),
+                                                                                                                                );
+                                                                                                                              },
+                                                                                                                            ),
+                                                                                                                          ),
+                                                                                                                        ),
+                                                                                                                        */
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
@@ -949,9 +959,17 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     );
   }
 
-  dispatchGoToProfileDisplay(profile) {
+  dispatchGoToProfileDisplay(Profile profile) {
     BlocProvider.of<ProfileBloc>(context).dispatch(
       GoToProfileDisplayEvent(
+        profile: profile,
+      ),
+    );
+  }
+
+  dispatchEditProfile(Profile profile) {
+    BlocProvider.of<ProfileBloc>(context).dispatch(
+      EditProfileEvent(
         profile: profile,
       ),
     );
